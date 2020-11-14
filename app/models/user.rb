@@ -8,4 +8,5 @@ class User < ApplicationRecord
   has_many :user_games
   has_many :consoles, through: :user_consoles
   has_many :games, through: :user_games
+  has_one_attached :photo
 end

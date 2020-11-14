@@ -1,2 +1,24 @@
-<h1>Pages#home</h1>
-<p>Find me in app/views/pages/home.html.erb</p>
+<div class="banner" style="background-image: linear-gradient(rgba(0,0,0,0.3),rgba(0,0,0,0.3)), url('https://images.unsplash.com/photo-1555581064-8ce820e50679?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80')">
+<h1>Time to join your gamecamp with your friends</h1>
+</div>
+
+<div class="container mt-5">
+  <h2>Games on the trend</h2>
+  <div class="card-grid">
+    <% @responses.each do |response|  %>
+      <div class="card" style="width: 18rem;">
+        <%= image_tag response["background_image"],class:"card-img-top", width:310, height: 170, alt: response['name'] %>
+        <div class="card-body">
+          <h3 class="card-title"><%= response['name'] %></h3>
+          <p class="card-text">rating: <%= response['rating'] %></p>
+          <p class="card-text">
+            <% response['platforms'].each do |platform| %>
+              <%= platform['name'] %>
+            <% end %>
+          </p>
+          <a href="#" class="btn btn-primary">Add to my collection</a>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
