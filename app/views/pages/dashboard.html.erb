@@ -1,0 +1,35 @@
+<div class="dash-container">
+  <div class="row">
+  <div class="content-grid">
+    <!-- user profile section, 1fr -->
+    <div class="user-profile">
+      <%= cl_image_tag @user.photo.key, alt: "#{@user.user_name}", class: "avatar-large"%>
+      <%= @user.user_name %>
+      <ul>
+        <% if @consoles %>
+          <% @consoles.each do |console| %>
+            <li><%= console.console_model %></li>
+          <% end %>
+        <% end %>
+      </ul>
+    </div>
+    <!-- end of user profile section -->
+
+    <!-- main game section, 2fr -->
+    <div class="games-section">
+      <!-- search bar -->
+        <%= render 'search_bar' %>
+        <%= @responses[0] %>
+
+      </div>
+    </div>
+    <!-- end of main game section-->
+
+    <!-- user action and notification sesction, 1fr-->
+    <div class="user-action">
+
+    </div>
+    <!-- end of user action section -->
+  </div>
+  </div>
+</div>
