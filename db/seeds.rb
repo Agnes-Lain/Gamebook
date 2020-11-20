@@ -1,4 +1,4 @@
-.# This file should contain all the record creation needed to seed the database with its default values.
+# This file should contain all the record creation needed to seed the database with its default values.
 # The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
 #
 # Examples:
@@ -7,9 +7,10 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 puts 'Destroying...␥'
-User.destroy_all
 UserGame.destroy_all
 UserConsole.destroy_all
+User.destroy_all
+Console.destroy_all
 
 puts '>>Loading...🚃'
 
@@ -40,3 +41,15 @@ game2 = Game.create(
   title: "The Legend of Zelda: A Link Between Worlds",
   rawg_id: 27977
 )
+
+puts "adding all available consoles from rawg 🕹"
+consoles_list = HTTParty.get("https://api.rawg.io/api/platforms?ordering=id")["results"]
+consoles_list2 = HTTParty.get("https://api.rawg.io/api/platforms?ordering=id&page=2")["results"]
+consoles = consoles_list + consoles_list2
+consoles.each do |console|
+  Console.create(
+    console_model: console['name'],
+    release_year: console["year_start"].to_i,
+    rawg_id: console['id']
+    )
+end

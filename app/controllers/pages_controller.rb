@@ -10,9 +10,9 @@ class PagesController < ApplicationController
   end
 
   def dashboard
+    @consoles = Console.all.sort.reverse
     @responses = HTTParty.get(URL)["results"][0..11]
     @user = current_user
-    @consoles = @user.consoles
     @user_games = @user.games
   end
 end
