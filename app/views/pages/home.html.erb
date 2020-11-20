@@ -14,7 +14,7 @@
           <p class="card-text">rating: <%= response['rating'] %></p>
           <p class="card-text">
             <% response['platforms'].each do |platform| %>
-              <%= platform['name'] %>
+              <p><%= platform['name'] %></p>
             <% end %>
           </p>
           <a href="#" class="btn btn-primary">Add to my collection</a>
