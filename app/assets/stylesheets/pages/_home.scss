@@ -6,19 +6,26 @@
   h1, .home-login {
     color: $pink;
     text-align: center;
-    padding-top: 100px;
+  }
+
+  h1 {
+    padding-top: 150px;
     padding-left: auto;
     padding-bottom:100px;
     padding-right: auto;
+    line-height: 5rem;
   }
   .home-login {
+    font-family: $title-font;
     font-size: 30px;
     display:block;
   }
 }
 
-.card-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  grid-gap: 30px;
+.games-set {
+  h2 {
+    color :$light-blue;
+    text-align: center;
+  }
 }
+

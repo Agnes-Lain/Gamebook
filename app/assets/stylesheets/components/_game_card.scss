@@ -1,0 +1,18 @@
+.card-grid-lg {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: 30px;
+  .card {
+    width: 20rem
+  }
+}
+
+.card-grid-sm {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 30px;
+  justify-items: center;
+  .card {
+    width: 20rem
+  }
+}

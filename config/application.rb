@@ -18,7 +18,7 @@ module Gamebook
 
     # this is to add fonts directory within the assets directory so that we can
     # resource these files in our css or sass files using proper rails conventions and the asset pipeline
-    # config.assets.paths << Rails.root.join("app", "assets", "fonts")
+     config.assets.paths << Rails.root.join("app", "assets", "fonts")
 
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration can go into files in config/initializers

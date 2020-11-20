@@ -1,0 +1,17 @@
+  <% responses.each do |response|  %>
+    <div class="card">
+      <% if response["background_image"] %>
+        <%= image_tag response["background_image"],class:"card-img-top", width:310, height: 170, alt: response['name'] %>
+      <% end %>
+      <div class="card-body">
+        <h3 class="card-title"><%= response['name'] %></h3>
+        <p class="card-text">rating: <%= response['rating'] %></p>
+        <p class="card-text">
+          <% response['platforms'].each do |platform| %>
+            <p><%= platform['name'] %></p>
+          <% end %>
+        </p>
+        <a href="#" class="btn btn-primary">Add to my collection</a>
+      </div>
+    </div>
+  <% end %>
