@@ -29,3 +29,11 @@ body {
   z-index: 0;
   // background: ;
 }
+
+h1, h2 {
+  font-family: $headers-font;
+}
+
+h3, h4, h5, h6 {
+  font-family: $title-font;
+}

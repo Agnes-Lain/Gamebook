@@ -1,25 +1,40 @@
-<form id="search-games" class="d-flex justify-content-around mt-5 mx-3">
+<!-- <form id="search-games" class="d-flex justify-content-around mt-5 mx-3">
   <input id="game-name" type="text" class="form-control ml-auto mr-2" placeholder="type the game name">
   <select id="console-model" name="platforms" class="form-control ml-auto mr-2">
-    <% platforms.each do |platform| %>
-      <option value=<%= platform.console_model %>><%= platform.console_model %></option>
-    <% end %>
+    <%# platforms.each do |platform| %>
+      <option value=<%#= platform.console_model %>><%#= platform.console_model %></option>
+    <%# end %>
   </select>
   <input type="submit" id="search-submit" class="btn btn-primary mr-auto ml-2" value="Search">
-</form>
+</form> -->
 
+  <!-- this is the form to send params to the back to launch the search in RAWG Api -->
+  <%= form_tag dashboard_path, class: "d-flex justify-content-around mt-5 mx-3", remote: true, method: "get" do %>
+    <%= text_field_tag :search,
+      params[:search],
+      class: "form-control ml-auto mr-2",
+      placeholder: "Game name to search!"
+    %>
+    <%= select_tag :platforms,
+      options_for_select(consoles.collect{ |console| console.console_model }),
+      class: "form-control ml-auto mr-2",
+      placeholder: "Platform?"
+    %>
+    <%= submit_tag "Search ", data: {action: "click->search#refresh"}, class: "btn btn-primary mr-auto" %>
+  <% end %>
+  <!-- end of the search action, then to render the result in the following game cards section -->
 
-
-
-
-
-<!-- <div class="search-bar mt-5">
-<%#= form_tag dashboard_path, method: "get" do %>
-  <div class="search-select col-5">
-    <%#= select_tag :console, options_for_select(Cause::CAUSES), class: 'select2', :multiple => true %>
+  <!-- show the search result with game cards -->
+  <div class="container mt-5">
+    <div class="game-card" data-target="search.results">
+      <div class="card-grid-sm my=5">
+        <% if @search_results %>
+          <%= render 'game_card', responses: @search_results %>
+        <% else %>
+          <%= render 'game_card', responses: @responses %>
+        <% end %>
+      </div>
+    </div>
   </div>
-  <%#= text_field_tag :games, "", required: false, id: "game-name", label: false, placeholder: "enter the game name to search!" %>
-  <%#= submit_tag "Search ", class: "btn btn-primary text-white" %>
-<%# end %>
-</div>
- -->
+  <!-- game cards end -->
+

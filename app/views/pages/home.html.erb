@@ -1,25 +1,15 @@
 <div class="banner">
-<h1>Time to join your gamecamp with your friends</h1>
-<%= link_to "Login now!", new_user_session_path, class: "home-login" %>
+<h1>Time to join your Gameclan with your friends!</h1>
+<%= link_to "Join now!", new_user_session_path, class: "home-login" %>
 </div>
 
 <div class="container mt-5">
-  <h2>Games on the trend</h2>
-  <div class="card-grid">
-    <% @responses.each do |response|  %>
-      <div class="card" style="width: 18rem;">
-        <%= image_tag response["background_image"],class:"card-img-top", width:310, height: 170, alt: response['name'] %>
-        <div class="card-body">
-          <h3 class="card-title"><%= response['name'] %></h3>
-          <p class="card-text">rating: <%= response['rating'] %></p>
-          <p class="card-text">
-            <% response['platforms'].each do |platform| %>
-              <p><%= platform['name'] %></p>
-            <% end %>
-          </p>
-          <a href="#" class="btn btn-primary">Add to my collection</a>
-        </div>
+  <div class="games-set">
+    <h2 class="my-5">Games on the trend</h2>
+    <div class="game-card">
+      <div class="card-grid-lg">
+        <%= render 'game_card', responses: @responses %>
       </div>
-    <% end %>
+    </div>
   </div>
 </div>

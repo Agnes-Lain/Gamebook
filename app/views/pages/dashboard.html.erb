@@ -11,14 +11,16 @@
     <!-- main game section, 2fr -->
     <div class="games-section">
       <!-- search bar -->
-      <%= render 'search_bar', platforms: @consoles %>
+      <div class="search-bar" data-controller="search">
+        <%= render 'search_bar', consoles: @consoles %>
+      </div>
     </div>
     <!-- end of main game section-->
 
     <!-- user action and notification sesction, 1fr-->
-    <div class="user-action">
+<!--     <div class="user-action">
 
-    </div>
+    </div> -->
     <!-- end of user action section -->
   </div>
   </div>
