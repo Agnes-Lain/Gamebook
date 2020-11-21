@@ -9,7 +9,7 @@
 </form> -->
 
   <!-- this is the form to send params to the back to launch the search in RAWG Api -->
-  <%= form_tag dashboard_path, class: "d-flex justify-content-around mt-5 mx-3", remote: true, method: "get" do %>
+  <%= form_tag dashboard_path, class: "d-flex justify-content-around mt-5 mx-3", method: "get" do %>
     <%= text_field_tag :search,
       params[:search],
       class: "form-control ml-auto mr-2",
@@ -20,12 +20,12 @@
       class: "form-control ml-auto mr-2",
       placeholder: "Platform?"
     %>
-    <%= submit_tag "Search ", data: {action: "click->search#refresh"}, class: "btn btn-primary mr-auto" %>
+    <%= submit_tag "Search", class: "btn btn-primary mr-auto" %>
   <% end %>
   <!-- end of the search action, then to render the result in the following game cards section -->
 
   <!-- show the search result with game cards -->
-  <div class="container mt-5">
+  <div class="container my-5">
     <div class="game-card" data-target="search.results">
       <div class="card-grid-sm my=5">
         <% if @search_results %>
