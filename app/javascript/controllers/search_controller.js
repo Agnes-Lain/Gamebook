@@ -3,7 +3,7 @@ import { Controller } from "stimulus"
 export default class extends Controller {
   static targets = ["results", "game", "platform"];
 
-  showCards(e) {
+  showCards() {
     // e.preventDefault()
     const game = this.gameTarget.value;
     const platformId = this.platformTarget.value;
