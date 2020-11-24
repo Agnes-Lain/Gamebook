@@ -21,3 +21,17 @@
 .navbar-lewagon .navbar-brand img {
   width: 40px;
 }
+
+.navbar {
+  span {
+    color:$rose;
+    font-family: $headers-font;
+    font-size: 20px;
+    margin-top: 7px;
+  }
+  i {
+    color: $light-blue;
+    font-size: 25px;
+    margin: auto 10px;
+  }
+}
