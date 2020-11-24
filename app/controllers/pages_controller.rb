@@ -10,10 +10,12 @@ class PagesController < ApplicationController
   end
 
   def dashboard
+    # initialize the user profile
     @consoles = Console.all.sort.reverse
-    @responses = HTTParty.get(URL)["results"][0..11]
     @user = current_user
     @user_games = @user.games
+
+    # this is the API to answer the fetch from the stimulus #search controller and send back the result
     if params["game"].present? && params["platform"].present?
       game_name = params['game']
       platform_id = params['platform'].to_i
@@ -25,7 +27,7 @@ class PagesController < ApplicationController
       platform_id = params['platform'].to_i
       @search_results = HTTParty.get("https://api.rawg.io/api/games?ordering=-released&platforms=#{platform_id}")["results"]
     else
-      @search_results = @responses
+      @search_results = HTTParty.get(URL)["results"][0..11]
     end
     respond_to do |format|
       format.html
