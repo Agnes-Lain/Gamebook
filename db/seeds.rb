@@ -42,10 +42,16 @@ game2 = Game.create(
   rawg_id: 27977
 )
 
+game3 = Game.create(
+  title: "Superhot"
+  rawg_id: 7819
+)
+
 puts "adding all available consoles from rawg 🕹"
+console_nil = Console.create(console_model:"Choose a platform",rawg_id: 0)
 consoles_list = HTTParty.get("https://api.rawg.io/api/platforms?ordering=id")["results"]
 consoles_list2 = HTTParty.get("https://api.rawg.io/api/platforms?ordering=id&page=2")["results"]
-consoles = consoles_list + consoles_list2
+consoles = console_nil + consoles_list + consoles_list2
 consoles.each do |console|
   Console.create(
     console_model: console['name'],
@@ -53,3 +59,14 @@ consoles.each do |console|
     rawg_id: console['id']
     )
 end
+
+ps4 = Console.find_by("console_model ilike ?", "PlayStation 4")
+game_console = GameConsole.create(console_id: ps4.id, game_id: game3.id)
+
+user1_console1 = UserConsole.create(user_id:user1.id, console_id:Console.last.id, rating: 4)
+user1_console2 = UserConsole.create(user_id:user1.id, console_id: ps4.id, rating: 2)
+user2_console1 = UserConsole.create(user_id:user1.id, console_id: ps4.id, rating: 5)
+
+user1_game1 = UserGame.create(user_id:user1.id, game_id: game3.id, rating: 4, comments:"Such a nice game")
+user2_game1 = UserGame.create(user_id:user2.id, game_id: game3.id, rating: 4, comments:"love it")
+
