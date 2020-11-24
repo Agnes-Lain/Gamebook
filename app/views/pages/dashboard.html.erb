@@ -13,14 +13,22 @@
       <!-- search bar -->
       <div class="search-bar" data-controller="search">
         <%= render 'search_bar', consoles: @consoles %>
+
+        <!-- show the search result with game cards -->
+        <div class="container my-5">
+          <div class="card-grid-sm" data-target="search.results">
+          </div>
+        </div>
+        <!-- game cards end -->
       </div>
+
     </div>
     <!-- end of main game section-->
 
-    <!-- user action and notification sesction, 1fr-->
-<!--     <div class="user-action">
+     <!-- user action and notification sesction, 1fr -->
+    <div class="user-action">
 
-    </div> -->
+    </div>
     <!-- end of user action section -->
   </div>
   </div>

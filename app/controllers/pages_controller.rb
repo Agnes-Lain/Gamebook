@@ -14,22 +14,26 @@ class PagesController < ApplicationController
     @responses = HTTParty.get(URL)["results"][0..11]
     @user = current_user
     @user_games = @user.games
-    if params["search"].present? || params["platforms"].present?
-      games = params['search']
-      platform = params['platforms']
-      platform_id = Console.where(console_model:platform).first.rawg_id
-      @search_results = HTTParty.get("https://api.rawg.io/api/games?search=#{games}&platforms=#{platform_id}&ordering=-released")["results"][1..11]
-      # respond_to do |format|
-      #   format.html
-      #   format.json { render json: { dashboard: @search_results }}
-      # end
+    if params["game"].present? && params["platform"].present?
+      game_name = params['game']
+      platform_id = params['platform'].to_i
+      @search_results = HTTParty.get("https://api.rawg.io/api/games?search=#{game_name}&platforms=#{platform_id}&ordering=-released")["results"]
+    elsif params["game"].present?
+      game_name = params['game']
+      @search_results = HTTParty.get("https://api.rawg.io/api/games?search=#{game_name}&ordering=-released")["results"]
+    elsif params["platform"].present?
+      platform_id = params['platform'].to_i
+      @search_results = HTTParty.get("https://api.rawg.io/api/games?ordering=-released&platforms=#{platform_id}")["results"]
+    else
+      @search_results = @responses
+    end
+    respond_to do |format|
+      format.html
+      format.json { render json: { results: @search_results }}
     end
   end
 
   private
 
-  def search_params
-    params.require(:games).permit(:search, :platforms)
-  end
 
 end
