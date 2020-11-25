@@ -2,23 +2,15 @@
 .banner {
   height:600px;
   background-size: cover;
-
-  h1, .home-login {
-    color: $pink;
-    text-align: center;
-  }
+  text-align: center;
 
   h1 {
+    color: $pink;
     padding-top: 150px;
     padding-left: auto;
     padding-bottom:100px;
     padding-right: auto;
     line-height: 5rem;
-  }
-  .home-login {
-    font-family: $title-font;
-    font-size: 30px;
-    display:block;
   }
 }
 
@@ -29,3 +21,15 @@
   }
 }
 
+.home-login {
+  text-decoration: none;
+  color:$light-blue;
+  font-family: $title-font;
+  text-align: center;
+  font-size: 30px;
+  display:block;
+  padding: 8px 20px;
+  border: 1px solid $pink;
+  border-radius: 50px;
+  display:inline-block;
+}

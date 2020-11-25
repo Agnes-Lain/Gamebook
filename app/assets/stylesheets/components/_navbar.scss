@@ -3,7 +3,8 @@
   background-color:transparent;
   transition: 0.3s background-color ease;
   .nav-link {
-    color:$sky !important;
+    color:$light-blue !important;
+    font-size: 18px;
   }
   .active > .nav-link {
     font-weight: 600 !important;
@@ -24,13 +25,13 @@
 
 .navbar {
   span {
-    color:$rose;
+    color:$light-blue;
     font-family: $headers-font;
     font-size: 20px;
     margin-top: 7px;
   }
   i {
-    color: $light-blue;
+    color: $rose;
     font-size: 25px;
     margin: auto 10px;
   }

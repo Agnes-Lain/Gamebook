@@ -1,5 +1,5 @@
 <div class="banner">
-<h1>Time to join your Gameclan with your friends!</h1>
+<h1>Time to open your GameBook and play with your friends!</h1>
 <%= link_to "Join now!", new_user_session_path, class: "home-login" %>
 </div>
 
@@ -7,7 +7,7 @@
   <div class="games-set">
     <h2 class="my-5">Games on the trend</h2>
     <div class="game-card">
-      <div class="card-grid-lg">
+      <div class="card-grid-lg" data-controller="add-game">
         <%= render 'game_card', responses: @responses %>
       </div>
     </div>

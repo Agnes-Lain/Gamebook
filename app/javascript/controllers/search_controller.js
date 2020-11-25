@@ -23,15 +23,15 @@ export default class extends Controller {
   };
 
   gameCard (game, platformId, platformList, gameGenres) {
-    return `<div class="card" data-platform-id="${platformId}" data-game-id="${game.id}" data->
-      <img src =${game.background_image === null ? "https://media.istockphoto.com/vectors/coming-soon-neon-banner-vector-template-glowing-night-bright-sign-vector-id1144514162?k=6&m=1144514162&s=612x612&w=0&h=np7sPl0hycuFTiDgfKCZFy3SF7XCjbRTcyF-sSKfMO8=" : game.background_image} class:"card-img-top" width="316" height="170">
+    return `<div class="card game-card" data-platform-id="${platformId}" data-game-id="${game.id}" data-controller="addGame" >
+      <img src =${game.background_image === null ? "https://media.istockphoto.com/vectors/coming-soon-neon-banner-vector-template-glowing-night-bright-sign-vector-id1144514162?k=6&m=1144514162&s=612x612&w=0&h=np7sPl0hycuFTiDgfKCZFy3SF7XCjbRTcyF-sSKfMO8=" : game.background_image} class:"card-img-top" width="316" height="170" alt="${game.name}">
       <div class="card-body">
         <h4 class="card-title">${game.name}</h4>
         <p class="card-text"><small>rating: ${game.rating}</small></p>
         <p class="game-release"><small>release date: ${game.released}</small></p>
         <p class="card-text">${platformList}</p>
         <p class="game-genres"><small>${gameGenres}</small></p>
-        <a href="#" class="btn btn-primary">Add to my collection</a>
+        <a href="#" data-action="click->addGame#saveGame"class="btn btn-primary add-game" remote=true>Add to my collection</a>
       </div>
 
     </div>`

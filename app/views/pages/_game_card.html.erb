@@ -1,17 +1,23 @@
   <% responses.each do |response|  %>
-    <div class="card">
+    <div class="card game-card" data-game-id=<%= response["id"]  %> >
       <% if response["background_image"] %>
-        <%= image_tag response["background_image"],class:"card-img-top", width:310, height: 170, alt: response['name'] %>
+        <%= image_tag response["background_image"] == nil ? "https://media.istockphoto.com/vectors/coming-soon-neon-banner-vector-template-glowing-night-bright-sign-vector-id1144514162?k=6&m=1144514162&s=612x612&w=0&h=np7sPl0hycuFTiDgfKCZFy3SF7XCjbRTcyF-sSKfMO8=" : response["background_image"],class:"card-img-top", width:310, height: 170, alt: response['name'] %>
       <% end %>
       <div class="card-body">
-        <h3 class="card-title"><%= response['name'] %></h3>
-        <p class="card-text">rating: <%= response['rating'] %></p>
+        <h4 class="card-title"><%= response['name'] %></h4>
+        <p class="card-text"><small>rating: <%= response['rating']%></small></p>
+        <p class="game-release"><small>release: <%= response["released"] %></small></p>
         <p class="card-text">
           <% response['platforms'].each do |platform| %>
-            <p><%= platform['name'] %></p>
+            <%= platform['platform']["name"] %> |
           <% end %>
         </p>
-        <a href="#" class="btn btn-primary">Add to my collection</a>
+        <p class="game-genres"><small>
+          <% response['genres'].each do |genre| %>
+            <%= genre['name'] %> |
+          <% end %>
+        </small></p>
+        <a href="#" class="btn btn-primary add-game">Add to my collection</a>
       </div>
     </div>
   <% end %>
