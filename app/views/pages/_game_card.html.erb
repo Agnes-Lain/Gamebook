@@ -1,23 +1,26 @@
   <% responses.each do |response|  %>
     <div class="card game-card" data-game-id=<%= response["id"]  %> >
-      <% if response["background_image"] %>
         <%= image_tag response["background_image"] == nil ? "https://media.istockphoto.com/vectors/coming-soon-neon-banner-vector-template-glowing-night-bright-sign-vector-id1144514162?k=6&m=1144514162&s=612x612&w=0&h=np7sPl0hycuFTiDgfKCZFy3SF7XCjbRTcyF-sSKfMO8=" : response["background_image"],class:"card-img-top", width:310, height: 170, alt: response['name'] %>
-      <% end %>
       <div class="card-body">
         <h4 class="card-title"><%= response['name'] %></h4>
         <p class="card-text"><small>rating: <%= response['rating']%></small></p>
         <p class="game-release"><small>release: <%= response["released"] %></small></p>
-        <p class="card-text">
-          <% response['platforms'].each do |platform| %>
-            <%= platform['platform']["name"] %> |
-          <% end %>
-        </p>
         <p class="game-genres"><small>
           <% response['genres'].each do |genre| %>
             <%= genre['name'] %> |
           <% end %>
         </small></p>
-        <a href="#" class="btn btn-primary add-game">Add to my collection</a>
+        <!-- checkboxes of platform so user can click to choose the platform of their blongs game -->
+          <div class="game-platforms">
+            <% response['platforms'].each do |platform| %>
+              <input type="checkbox" class="checkbox-platform" data-target="addgame.platform" id=<%= "#{response['id']}-#{platform["platform"]["id"]}" %>>
+              <label for=<%= "#{response['id']}-#{platform["platform"]["id"]}" %>><%=platform['platform']["name"]%></label>
+            <% end %>
+          </div>
+          <!-- end of checkbox div -->
+          <%#= link_to "Add to my collection", user_user_games_path(current_user), method: :post, class: "btn btn-primary add-game", data: {action: "click->addgame#saveGame"} %>
+        <a href="/" class="btn btn-primary add-game" data-action="click->addgame#saveGame">Add to my collection</a>
       </div>
     </div>
   <% end %>
+
