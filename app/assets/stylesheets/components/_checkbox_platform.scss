@@ -1,0 +1,26 @@
+.game-platforms {
+  display: inline-block;
+}
+
+.checkbox-platform {
+  position: absolute;
+  transform: scale(0);
+}
+
+.checkbox-platform + label {
+  cursor: pointer;
+  display: inline-block;
+  font-size: 0.7rem;
+  border-radius: 50rem;
+  padding: 0.1rem 0.5rem;
+  background-color: rgba(208, 156, 191, 0.2);
+  color: $rose;
+  border: 1px solid $rose;
+  margin-right: 0.4rem;
+  margin-bottom: 0.4rem;
+}
+
+.checkbox-platform:checked + label {
+  background-color: $rose;
+  color: $light-gray;
+}
