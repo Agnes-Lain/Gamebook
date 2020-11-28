@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_19_224125) do
+ActiveRecord::Schema.define(version: 2020_11_27_231500) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -36,74 +36,36 @@ ActiveRecord::Schema.define(version: 2020_11_19_224125) do
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
   end
 
-  create_table "consoles", force: :cascade do |t|
-    t.string "console_model"
-    t.text "description"
-    t.integer "release_year"
+  create_table "user_game_user_platforms", force: :cascade do |t|
+    t.bigint "user_platform_id", null: false
+    t.bigint "user_game_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.integer "rawg_id"
-  end
-
-  create_table "game_consoles", force: :cascade do |t|
-    t.bigint "console_id", null: false
-    t.bigint "game_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["console_id"], name: "index_game_consoles_on_console_id"
-    t.index ["game_id"], name: "index_game_consoles_on_game_id"
-  end
-
-  create_table "game_genres", force: :cascade do |t|
-    t.bigint "game_id", null: false
-    t.bigint "genre_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["game_id"], name: "index_game_genres_on_game_id"
-    t.index ["genre_id"], name: "index_game_genres_on_genre_id"
-  end
-
-  create_table "games", force: :cascade do |t|
-    t.string "title"
-    t.datetime "release_date"
-    t.string "studio"
-    t.string "description"
-    t.integer "age_limit"
-    t.boolean "is_online"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.integer "rawg_id"
-  end
-
-  create_table "genres", force: :cascade do |t|
-    t.string "title"
-    t.text "description"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.integer "rawg_id"
-  end
-
-  create_table "user_consoles", force: :cascade do |t|
-    t.bigint "user_id", null: false
-    t.bigint "console_id", null: false
-    t.integer "rating"
-    t.datetime "buy_date"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["console_id"], name: "index_user_consoles_on_console_id"
-    t.index ["user_id"], name: "index_user_consoles_on_user_id"
+    t.index ["user_game_id", "user_platform_id"], name: "user_platform_game_index", unique: true
+    t.index ["user_game_id"], name: "index_user_game_user_platforms_on_user_game_id"
+    t.index ["user_platform_id"], name: "index_user_game_user_platforms_on_user_platform_id"
   end
 
   create_table "user_games", force: :cascade do |t|
     t.bigint "user_id", null: false
-    t.bigint "game_id", null: false
+    t.integer "rawg_game_id"
     t.integer "rating"
-    t.datetime "buy_date"
     t.text "comments"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["game_id"], name: "index_user_games_on_game_id"
+    t.index ["user_id", "rawg_game_id"], name: "index_user_games_on_user_id_and_rawg_game_id", unique: true
     t.index ["user_id"], name: "index_user_games_on_user_id"
+  end
+
+  create_table "user_platforms", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.integer "rawg_platform_id"
+    t.integer "rating"
+    t.text "comments"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id", "rawg_platform_id"], name: "index_user_platforms_on_user_id_and_rawg_platform_id", unique: true
+    t.index ["user_id"], name: "index_user_platforms_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -122,12 +84,8 @@ ActiveRecord::Schema.define(version: 2020_11_19_224125) do
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "game_consoles", "consoles"
-  add_foreign_key "game_consoles", "games"
-  add_foreign_key "game_genres", "games"
-  add_foreign_key "game_genres", "genres"
-  add_foreign_key "user_consoles", "consoles"
-  add_foreign_key "user_consoles", "users"
-  add_foreign_key "user_games", "games"
+  add_foreign_key "user_game_user_platforms", "user_games"
+  add_foreign_key "user_game_user_platforms", "user_platforms"
   add_foreign_key "user_games", "users"
+  add_foreign_key "user_platforms", "users"
 end

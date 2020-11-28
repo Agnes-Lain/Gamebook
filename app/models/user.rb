@@ -4,9 +4,8 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  has_many :user_consoles
+  has_many :user_platforms
   has_many :user_games
-  has_many :consoles, through: :user_consoles
-  has_many :games, through: :user_games
+  has_many :user_game_user_platforms, through: :user_games
   has_one_attached :photo
 end

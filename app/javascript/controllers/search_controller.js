@@ -10,9 +10,9 @@ export default class extends Controller {
     fetch(`/user?game=${game}&platform=${platformId}`, { headers: { accept: "application/json"} })
       .then(response => response.json())
       .then((data) => {
-        console.log(data)
         this.resultsTarget.innerHTML = data.card_html;
         // let gamesHTML = "";
+
         // const searchResults = data.results;
         // searchResults.forEach(result => {
         //   let platforms = result.platforms;
