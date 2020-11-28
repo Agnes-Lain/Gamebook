@@ -11,7 +11,7 @@ export default class extends Controller {
       alert("You have to choose a game platform first to add a game to collection! Click the platform button to choose.");
     } else {
       platforms.forEach (platform => {
-        // fetch to post data to create user_games
+        // begin fetch to post data to create user_platforms
         fetchWithToken(`/users/${platform.dataset.user}/user_platforms`, {
           method: "POST",
           headers: {
@@ -25,6 +25,24 @@ export default class extends Controller {
             console.log(data)
           }
         )
+        // end of user_platforms fetch
+
+        // begin fetch to post game data to create user_games
+        fetchWithToken(`/users/${platform.dataset.user}/user_games`, {
+          method: "POST",
+          headers: {
+            "Accept": "application/json",
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({ game: { rawg_game_id: platform.id.split("-")[0] } })
+        })
+          .then(response => response.json())
+          .then((data) => {
+            console.log(data)
+          }
+        )
+        // end of user_game fetch
+
       })
     }
   }

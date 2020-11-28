@@ -1,6 +1,7 @@
 class PagesController < ApplicationController
   include HtmlRender
   skip_before_action :authenticate_user!, only: [ :home ]
+  skip_after_action :verify_authorized, only: [:home, :dashboard]
 
   NOWDATE = Time.now.to_date.to_s
   LASTDATE = (NOWDATE.to_date - 183).to_s
