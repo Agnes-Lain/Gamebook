@@ -1,1 +1,14 @@
+<h1>GameBook</h1>
+----------------------------------
+
+This is a platform for gamers to track all their game collections linked with their owned platforms, and to share their collections with their friends. It's a game and social platform between friends, to check what games our friends are playing right now, and to organise to play together. 
+
+The key is cross platforms but keep within small communities, not mean to show your data to others which is not your friends.
+
+There is a chatroom feature to message with friends or leave messages to them, in order to discuss about the game or orgnise a game party together.
+
+This platform is based on the [RAWG API](https://rawg.io/apidocs), all the game information are from their database, only user concerned data is stocked under this platform.
+
+challenge: different than the normal rails app, as the essential datas are from an API, the app is built mostly on ajax controllers to communicate with the back.
+
 Rails app generated with [lewagon/rails-templates](https://github.com/lewagon/rails-templates), created by the [Le Wagon coding bootcamp](https://www.lewagon.com) team.
