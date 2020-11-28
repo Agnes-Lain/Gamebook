@@ -1,4 +1,4 @@
-class UserPlatformPolicy < ApplicationPolicy
+class UserGamePolicy < ApplicationPolicy
   class Scope < Scope
     def resolve
       scope.all
@@ -16,5 +16,4 @@ class UserPlatformPolicy < ApplicationPolicy
   def destroy?
     @record.user == @user
   end
-
 end
