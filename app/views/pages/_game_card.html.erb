@@ -10,16 +10,25 @@
             <%= genre['name'] %> |
           <% end %>
         </small></p>
-        <!-- checkboxes of platform so user can click to choose the platform of their blongs game -->
+          <!-- checkboxes of platform so user can click to choose the platform of their blongs game -->
           <div class="game-platforms">
             <% response['platforms'].each do |platform| %>
-              <input type="checkbox" class="checkbox-platform" data-target="addgame.platform" id=<%= "#{response['id']}-#{platform["platform"]["id"]}" %>>
-              <label for=<%= "#{response['id']}-#{platform["platform"]["id"]}" %>><%=platform['platform']["name"]%></label>
+              <% if current_user %>
+                <input type="checkbox" class="checkbox-platform" data-target="addgame.platform" data-user=<%= current_user.id %> id=<%= "#{response['id']}-#{platform["platform"]["id"]}" %>>
+                <label for=<%= "#{response['id']}-#{platform["platform"]["id"]}" %>><%=platform['platform']["name"]%></label>
+              <% else %>
+                <input type="checkbox" class="checkbox-platform" data-target="addgame.platform" id=<%= "#{response['id']}-#{platform["platform"]["id"]}" %>>
+                <label for=<%= "#{response['id']}-#{platform["platform"]["id"]}" %>><%=platform['platform']["name"]%></label>
+              <% end %>
             <% end %>
           </div>
           <!-- end of checkbox div -->
-          <%#= link_to "Add to my collection", user_user_games_path(current_user), method: :post, class: "btn btn-primary add-game", data: {action: "click->addgame#saveGame"} %>
-        <a href="/" class="btn btn-primary add-game" data-action="click->addgame#saveGame">Add to my collection</a>
+          <% if current_user %>
+            <button class="btn btn-primary add-game" date-remote="true" data-action="click->addgame#saveGame">Add to my collection</button>
+          <% else %>
+            <%= link_to "Add to my collection", new_user_session_path, class: "btn btn-primary add-game" %>
+          <% end %>
+          <%#= link_to "Add to my collection", user_user_consoles_path(current_user), method: :post, class: "btn btn-primary add-game", data: {action: "click->addgame#saveGame"} %>
       </div>
     </div>
   <% end %>

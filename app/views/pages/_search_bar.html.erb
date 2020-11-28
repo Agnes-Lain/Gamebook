@@ -13,7 +13,7 @@
       placeholder: "Game name to search!"
     %>
     <%= select_tag :platform,
-      options_from_collection_for_select(consoles, "rawg_id", "console_model", "102"),
+      options_for_select(platforms),
       data: {target: "search.platform"},
       class: "form-control ml-auto mr-2"
     %>
