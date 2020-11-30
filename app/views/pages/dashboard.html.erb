@@ -3,8 +3,7 @@
   <div class="content-grid">
     <!-- user profile section, 1fr -->
     <div class="user-profile">
-      <%= cl_image_tag @user.photo.key, alt: "#{@user.user_name}", class: "avatar-large"%>
-      <%= @user.user_name %>
+      <%= render 'load_user', user: current_user, platforms: @user_platforms, user_games: @user_games %>
     </div>
     <!-- end of user profile section -->
 

@@ -30,6 +30,6 @@ class UserGamesController < ApplicationController
   private
 
   def game_params
-    params.require(:game).permit(:rawg_game_id)
+    params.require(:game).permit(:rawg_game_id, :game_name)
   end
 end

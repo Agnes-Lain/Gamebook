@@ -29,7 +29,7 @@ class UserPlatformsController < ApplicationController
   end
 
   def platform_params
-    params.require(:platform).permit(:rawg_platform_id)
+    params.require(:platform).permit(:rawg_platform_id, :platform_name)
   end
 
 end

@@ -1,5 +1,20 @@
 .user-profile {
   background-color:$sky;
-  height: 80vh;
+  height: 600px;
   border-radius: 5px;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 70px;
+  .container-user {
+    margin-top: 15px;
+    text-align: center;
+    color:$ocean;
+  }
+
+  i {
+    color: $red;
+    font-size: 30px !important;
+  }
 }
+
+

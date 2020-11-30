@@ -17,6 +17,7 @@ class PagesController < ApplicationController
     @platforms = [["Choose a platform", ""]] + (platforms1 + platforms2).map{ |platform| [platform["name"], platform["id"]] }
     @user = current_user
     @user_platforms = UserPlatform.all
+    @user_games = UserGame.all
 
     @genres = [["Game Type", ""]]+ HTTParty.get("https://api.rawg.io/api/genres")["results"].map{ |genre| [genre["name"], genre["id"]] }
 
