@@ -17,6 +17,13 @@
       data: {target: "search.platform"},
       class: "form-control ml-auto mr-2"
     %>
+
+    <%= select_tag :genre,
+      options_for_select(genres),
+      data: {target: "search.genre"},
+      class: "form-control ml-auto mr-2"
+    %>
+
     <%= submit_tag "Search", class: "btn btn-primary mr-auto"%>
   <% end %>
   <!-- end of the search action, then to render the result in the following game cards section -->
