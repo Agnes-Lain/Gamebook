@@ -14,7 +14,7 @@
           <div class="game-platforms">
             <% response['platforms'].each do |platform| %>
               <% if current_user %>
-                <input type="checkbox" class="checkbox-platform" data-target="addgame.platform" data-user=<%= current_user.id %> id=<%= "#{response['id']}-#{platform["platform"]["id"]}" %>>
+                <input type="checkbox" class="checkbox-platform" data-target="addgame.platform" data-platform="<%= platform['platform']["name"] %>" data-game="<%= response['name'] %>" data-user=<%= current_user.id %> id=<%= "#{response['id']}-#{platform["platform"]["id"]}" %>>
                 <label for=<%= "#{response['id']}-#{platform["platform"]["id"]}" %>><%=platform['platform']["name"]%></label>
               <% else %>
                 <input type="checkbox" class="checkbox-platform" data-target="addgame.platform" id=<%= "#{response['id']}-#{platform["platform"]["id"]}" %>>

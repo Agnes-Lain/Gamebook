@@ -2,9 +2,11 @@ Rails.application.routes.draw do
   devise_for :users
 
   resources :users do
-    resources :user_games, only: [:create, :update, :destroy]
-    resources :user_platforms, only: [:create, :update, :destroy]
+    resources :user_games, only: [:create]
+    resources :user_platforms, only: [:create]
   end
+
+  resources :user_game_user_platforms, only: [:create]
 
   root to: 'pages#home'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
