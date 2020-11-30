@@ -5,7 +5,7 @@ class PagesController < ApplicationController
 
   NOWDATE = Time.now.to_date.to_s
   LASTDATE = (NOWDATE.to_date - 183).to_s
-  URL = "https://api.rawg.io/api/games?dates=#{LASTDATE},#{NOWDATE}&ordering=-added"
+  URL = "https://api.rawg.io/api/games?search=&dates=#{LASTDATE},#{NOWDATE}&ordering=-rating"
 
   def home
     @responses = HTTParty.get(URL)["results"][0..11]
@@ -14,27 +14,30 @@ class PagesController < ApplicationController
   def dashboard
     platforms1 = HTTParty.get("https://api.rawg.io/api/platforms?ordering=name")["results"]
     platforms2 = HTTParty.get("https://api.rawg.io/api/platforms?ordering=name&page=2")["results"]
-    @platforms = ["Choose a platform"] + (platforms1 + platforms2).map{ |platform| [platform["name"], platform["id"]] }
+    @platforms = [["Choose a platform", ""]] + (platforms1 + platforms2).map{ |platform| [platform["name"], platform["id"]] }
     @user = current_user
     @user_platforms = UserPlatform.all
+
+    @genres = [["Game Type", ""]]+ HTTParty.get("https://api.rawg.io/api/genres")["results"].map{ |genre| [genre["name"], genre["id"]] }
+
     # this is the API to answer the fetch from the stimulus #search controller and send back the result
-    if params[:game].present? && params[:platform].present?
-      game_name = params[:game]
-      platform_id = params['platform'].to_i
-      @search_results = HTTParty.get("https://api.rawg.io/api/games?search=#{game_name}&platforms=#{platform_id}&ordering=-released")["results"]
-    elsif params[:game].present?
-      game_name = params[:game]
-      @search_results = HTTParty.get("https://api.rawg.io/api/games?search=#{game_name}")["results"]
-    elsif params[:platform].present?
-      platform_id = params[:platform].to_i
-      @search_results = HTTParty.get("https://api.rawg.io/api/games?ordering=-released&platforms=#{platform_id}")["results"]
-    else
-      @search_results = HTTParty.get(URL)["results"][0..11]
+    base_url = "https://api.rawg.io/api/games?search="
+
+    search_array = []
+    if params[:game].present?
+      search_array << "#{params[:game]}"
     end
-        # render json: {
-        # # results: @search_results
-        #   html_data: render_to_string(partial: "game_card", layout: false, locals: { responses: @search_results })
-        # }
+    if params[:platform].present?
+      search_array << "&platforms=#{params['platform'].to_i}"
+    end
+    if params[:genre].present?
+      search_array << "&genres=#{params['genre'].to_i}"
+    end
+    # search_array << "&ordering=-rating"
+
+    final_url = base_url + search_array.join('')
+
+    @search_results = HTTParty.get(final_url)["results"]
 
     respond_to do |format|
       format.html { render }
@@ -45,8 +48,5 @@ class PagesController < ApplicationController
       }
     end
   end
-
-  private
-
 
 end
