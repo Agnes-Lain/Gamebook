@@ -22,7 +22,7 @@ export default class extends Controller {
               "Accept": "application/json",
               "Content-Type": "application/json"
             },
-            body: JSON.stringify({ platform: { rawg_platform_id: platform.id.split("-")[1] } })
+            body: JSON.stringify({ platform: { rawg_platform_id: platform.id.split("-")[1], platform_name: platform.dataset.platform } })
           });
 
           // fetch post data to user_games table and stock the response into a variable
@@ -32,7 +32,7 @@ export default class extends Controller {
               "Accept": "application/json",
               "Content-Type": "application/json"
             },
-            body: JSON.stringify({ game: { rawg_game_id: platform.id.split("-")[0] } })
+            body: JSON.stringify({ game: { rawg_game_id: platform.id.split("-")[0], game_name: platform.dataset.game } })
           });
 
           // define two new variable to stock the response in json from the above two.
@@ -64,7 +64,7 @@ export default class extends Controller {
         // call the async function and out put the final data.
         saveGamePlatform (platform)
           .then(data => {
-            alert(data.message)
+            alert(data.notice)
           });
 
         platform.checked = false;

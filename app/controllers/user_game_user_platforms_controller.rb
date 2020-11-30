@@ -13,21 +13,21 @@ class UserGameUserPlatformsController < ApplicationController
         respond_to do |format|
           format.html { render }
           format.json {
-            render json: { success: true, message: "A new game and a new platform have been added to your collection" }
+            render json: { success: true, notice: "A new game and a new platform have been added to your collection" }
           }
         end
       elsif params[:game_platform][:userPlatform][:success]
         respond_to do |format|
           format.html { render }
           format.json {
-            render json: { success: true, message: "Your game has been added to a new platform" }
+            render json: { success: true, notice: "Your game has been added to a new platform" }
           }
         end
       else
         respond_to do |format|
           format.html { render }
           format.json {
-            render json: { success: true, message: "Your new game has been added to your platform" }
+            render json: { success: true, notice: "Your new game has been added to your platform" }
           }
         end
       end
@@ -35,7 +35,7 @@ class UserGameUserPlatformsController < ApplicationController
       respond_to do |format|
         format.html { render }
         format.json {
-          render json: { success: false, message: "This game exist already in your collecion, can't add again" }
+          render json: { success: false, notice: "This game exist already in your collecion, can't add again" }
         }
       end
     end
