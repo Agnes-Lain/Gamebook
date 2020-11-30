@@ -3,8 +3,8 @@ class UserGameUserPlatformsController < ApplicationController
 
   def create
     @user_game_user_platform = UserGameUserPlatform.new(
-      user_platform_id: game_platform_params[:userPlatform][:user_platform_id],
-      user_game_id: game_platform_params[:userGame][:user_game_id]
+      user_platform_id: params[:game_platform][:userPlatform][:user_platform_id],
+      user_game_id: params[:game_platform][:userGame][:user_game_id]
     )
     authorize @user_game_user_platform
 
