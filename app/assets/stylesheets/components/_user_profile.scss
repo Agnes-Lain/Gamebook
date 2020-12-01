@@ -1,7 +1,7 @@
 .user-profile {
   background-color:$sky;
   height: 600px;
-  border-radius: 5px;
+  border-radius: 20px;
   position: -webkit-sticky;
   position: sticky;
   top: 70px;
@@ -9,11 +9,17 @@
     margin-top: 15px;
     text-align: center;
     color:$ocean;
+
   }
 
   i {
     color: $red;
-    font-size: 30px !important;
+    font-size: 20px !important;
+    vertical-align: middle;
+  }
+  .user_name {
+    font-family: $headers-font;
+    margin-top: 1rem;
   }
 }
 

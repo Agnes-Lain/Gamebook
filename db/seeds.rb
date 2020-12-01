@@ -7,6 +7,7 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 puts 'Destroying...␥'
+UserGameUserPlatform.destroy_all
 UserGame.destroy_all
 UserPlatform.destroy_all
 User.destroy_all
@@ -49,14 +50,14 @@ puts "user2 created"
 #     )
 # end
 
-puts "user_platforms create..."
-user1_platform1 = UserPlatform.create(user_id:user1.id, rawg_platform_id: 18, rating: 4, comments: "I don't really like the touch of controller, but fine, it runs fast")
-user1_platform2 = UserPlatform.create(user_id:user1.id, rawg_platform_id: 4, rating: 2, comments: "my pc is too old, slow")
-user2_platform1 = UserPlatform.create(user_id:user2.id, rawg_platform_id: 18, rating: 5, comments: "I love platstations!")
-puts "user_platforms created!"
+# puts "user_platforms create..."
+# user1_platform1 = UserPlatform.create(user_id:user1.id, rawg_platform_id: 18, rating: 4, comments: "I don't really like the touch of controller, but fine, it runs fast")
+# user1_platform2 = UserPlatform.create(user_id:user1.id, rawg_platform_id: 4, rating: 2, comments: "my pc is too old, slow")
+# user2_platform1 = UserPlatform.create(user_id:user2.id, rawg_platform_id: 18, rating: 5, comments: "I love platstations!")
+# puts "user_platforms created!"
 
-puts "user_games create..."
-user1_game1 = UserGame.create(user_id:user1.id, rawg_game_id: 50677 , rating: 4, comments: "Such a nice game")
-user2_game1 = UserGame.create(user_id:user2.id, rawg_game_id: 50677, rating: 5, comments: "love it")
-puts "user_games created!"
+# puts "user_games create..."
+# user1_game1 = UserGame.create(user_id:user1.id, rawg_game_id: 50677 , rating: 4, comments: "Such a nice game")
+# user2_game1 = UserGame.create(user_id:user2.id, rawg_game_id: 50677, rating: 5, comments: "love it")
+# puts "user_games created!"
 

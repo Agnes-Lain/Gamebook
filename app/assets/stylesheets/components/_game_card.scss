@@ -22,14 +22,29 @@
   p {
     margin-bottom: 0px !important;
   }
+  border-radius: 23px !important;
+  .card-img-top {
+    border-radius: 20px 20px 0 0;
+  }
+  border:0px !important;
+  box-shadow: 0 0 10px rgba(106, 161, 204, 0.5)
 }
 
-.add-game {
+.act-wrapper {
   position:absolute;
   right: 15px;
   bottom: 10px;
+  .fa-gift {
+    font-size: 25px;
+    margin-right:10px;
+    margin-top: 3px;
+  }
+}
+
+.add-game {
+  vertical-align: middle;
 }
 
 .game-platforms {
-  margin-bottom: 50px;
+  margin-bottom: 30px;
 }
