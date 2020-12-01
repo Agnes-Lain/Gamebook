@@ -9,16 +9,20 @@
 
     <!-- main game section, 2fr -->
     <div class="games-section">
-      <!-- search bar -->
-      <div class="search-bar" data-controller="search">
-        <%= render 'search_bar', platforms: @platforms, genres: @genres %>
+      <div class="game-section-container">
 
-        <!-- show the search result with game cards -->
-        <div class="container my-5" data-controller="addgame">
-          <div class="card-grid-sm" data-target="search.results">
+        <!-- search bar -->
+        <div class="search-bar" data-controller="search">
+          <%= render 'search_bar', platforms: @platforms, genres: @genres %>
+
+          <!-- show the search result with game cards -->
+          <div class="container my-3" data-controller="addgame">
+            <div class="card-grid-sm" data-target="search.results">
+            </div>
           </div>
+          <!-- game cards end -->
         </div>
-        <!-- game cards end -->
+        <!-- search bar and card render end -->
       </div>
 
     </div>

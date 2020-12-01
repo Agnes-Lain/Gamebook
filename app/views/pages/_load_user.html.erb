@@ -1,10 +1,10 @@
 <div class="container-user">
   <%= cl_image_tag user.photo.key, alt: "#{user.user_name}", class: "avatar-large"%>
-  <h6><%= user.user_name %></h6>
-  <h6>Owned Games: <%= user_games.count %></h6>
-  <ul><i class="fas fa-gamepad"></i> - <%= platforms.count %> platforms
+  <h6 class=user_name><%= user.user_name %></h6>
+  <h6><i class="fas fa-ghost"> </i>Owned Games: <%= user_games.count %></h6>
+  <span><i class="fas fa-gamepad"></i> <%= platforms.count %> platforms</span>
     <% platforms.each do |platform| %>
-      <li><h6><%= platform.platform_name %> - <%= platform.user_games.count %></h6></li>
+      <input type="checkbox" class="checkbox-platform" id=<%= platform.id %>>
+      <label for=<%= platform.id %>><%=platform.platform_name%> <%=platform.user_games.count%></label>
     <% end %>
-  </ul>
 </div>

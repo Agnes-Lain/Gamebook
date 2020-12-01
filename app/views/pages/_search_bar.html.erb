@@ -1,7 +1,7 @@
 
   <!-- this is the form to send params to the back to launch the search in RAWG Api -->
   <%= form_tag "/",
-    class: "d-flex justify-content-around mt-5 mx-3",
+    class: "d-flex justify-content-around mt-4 mx-3",
     data: {action: "submit->search#showCards"},
     remote: true,
     method: "get" do
