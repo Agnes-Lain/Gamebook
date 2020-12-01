@@ -10,6 +10,7 @@
         <p class="game-genres"><small>
           <%= response['genres'].map { |genre| genre['name'] }.join(" | ") %>
         </small></p>
+        <hr>
           <!-- checkboxes of platform so user can click to choose the platform of their blongs game -->
           <div class="game-platforms">
             <% response['platforms'].each do |platform| %>
