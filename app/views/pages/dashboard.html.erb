@@ -13,7 +13,7 @@
 
         <!-- search bar -->
         <div class="search-bar" data-controller="search">
-          <%= render 'search_bar', platforms: @platforms, genres: @genres %>
+          <%= render 'search_bar', platforms: @platforms, genres: @genres, games_count: @games_count %>
 
           <!-- show the search result with game cards -->
           <div class="container my-3" data-controller="addgame">
@@ -23,6 +23,11 @@
           <!-- game cards end -->
         </div>
         <!-- search bar and card render end -->
+
+        <h3>My Games</h3>
+        <div class="card-grid-sm">
+          <%= render "game_card", responses: @user_games %>
+        </div>
       </div>
 
     </div>
@@ -30,7 +35,32 @@
 
      <!-- user action and notification sesction, 1fr -->
     <div class="user-action">
+      <div class="container">
+        <!-- this is the part user can search other user to add to friend -->
+        <div class="search-user" data-controller="users">
+          <%= render 'search_user' %>
+          <div id="user-list">
+            <ul data-target="users.userList">
 
+            </ul>
+          </div>
+        </div>
+
+        <hr>
+        <!-- this is the part of user's friends list -->
+        <div class="friends">
+          <h6>My Friends</h6>
+          <ul>
+            <% @friends.each do |friend| %>
+              <li data-user=<%= friend.id %> class="d-flex justify-content-between mt-2">
+                <span><%= cl_image_tag friend.photo.key, alt: "#{friend.user_name}", class: "avatar"%> <%= friend.user_name %></span>
+                <span><i class="fas fa-comments"></i></span>
+              </li>
+            <% end %>
+          </ul>
+        </div>
+
+      </div>
     </div>
     <!-- end of user action section -->
   </div>

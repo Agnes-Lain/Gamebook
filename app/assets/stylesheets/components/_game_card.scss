@@ -1,6 +1,7 @@
 .card-grid-lg {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
+  justify-items: center;
   grid-gap: 30px;
   .card {
     width: 20rem
@@ -9,7 +10,7 @@
 
 .card-grid-sm {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr 1fr ;
   grid-gap: 30px;
   justify-items: center;
   .card {
@@ -22,7 +23,7 @@
   p {
     margin-bottom: 0px !important;
   }
-  border-radius: 23px !important;
+  border-radius: 23px 23px 20px 20px !important;
   .card-img-top {
     border-radius: 20px 20px 0 0;
   }

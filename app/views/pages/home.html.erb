@@ -3,8 +3,23 @@
 <%= link_to "Join now!", new_user_session_path, class: "home-login" %>
 </div>
 
-<div class="container mt-5">
+<div class="game-container mt-5">
   <div class="games-set">
+
+    <!-- search bar -->
+    <div class="search-bar" data-controller="search">
+      <%= render 'search_bar', platforms: @platforms, genres: @genres, games_count: @games_count %>
+
+      <!-- show the search result with game cards -->
+      <div class="container my-3" data-controller="addgame">
+        <div class="card-grid-lg" data-target="search.results">
+        </div>
+      </div>
+      <!-- game cards end -->
+    </div>
+    <!-- search bar and card render end -->
+
+
     <h2 class="my-5">Games on the trend</h2>
     <div class="game-cards">
       <div class="card-grid-lg" data-controller="addgame">

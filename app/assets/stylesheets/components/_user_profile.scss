@@ -1,14 +1,14 @@
 .user-profile {
-  background-color:$sky;
+  background-color:$lake;
   height: 600px;
   border-radius: 20px;
   position: -webkit-sticky;
   position: sticky;
-  top: 70px;
+  top: 63px;
   .container-user {
-    margin-top: 15px;
+    margin: 20px 10px;
     text-align: center;
-    color:$ocean;
+    color:$light-gray;
 
   }
 
@@ -18,9 +18,17 @@
     vertical-align: middle;
   }
   .user_name {
-    font-family: $headers-font;
     margin-top: 1rem;
   }
+  hr {
+    border-color: $light-gray;
+  }
+  .btn-square {
+    color: $light-gray;
+
+  }
 }
+
+
 
 

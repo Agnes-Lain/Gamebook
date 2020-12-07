@@ -2,3 +2,21 @@
   background-color: $light-gray;
   opacity: 1 !important;
 }
+
+.form-control {
+  border-top: 0px !important;
+  border-bottom: 0px !important;
+  border-left: 0px !important;
+  border-radius: 0px !important;
+}
+
+.search-wrap {
+  padding: 5px;
+  border-radius: 50rem;
+  background-color: white;
+  box-shadow: 0 0 5px lightgray;
+}
+
+.btn-search {
+  border-radius: 50px !important;
+}

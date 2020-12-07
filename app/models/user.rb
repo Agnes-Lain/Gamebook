@@ -9,5 +9,33 @@ class User < ApplicationRecord
   has_many :user_platforms, dependent: :destroy
   has_many :user_games, dependent: :destroy
   has_many :user_game_user_platforms, through: :user_games, dependent: :destroy
+  has_many :chatroom_users, dependent: :destroy
+  has_many :chatrooms, through: :user_chatrooms
+  # has_and_belongs_to_many :friendships,
+  #   class_name: "User",
+  #   join_table:  :friendships,
+  #   foreign_key: :user_id,
+  #   association_foreign_key: :friend_user_id
+
+  has_many :friend_user_relationships, foreign_key: :user_id, class_name: 'Friendship'
+  has_many :friend_users, through: :friend_user_relationships, source: :friend_user
+
+  has_many :user_relationship, foreign_key: :friend_user_id, class_name: 'Friendship'
+  has_many :users, through: :user_relationships, source: :user
+
   has_one_attached :photo
+
+  def add_friend(user_id)
+    friend_user_relationships.create(friend_user_id: user_id)
+
+  end
+
+  def un_friend(user_id)
+    friend_user_relationships.find_by(friend_user_id: user_id).destroy
+  end
+
+  def is_friend?(user_id)
+    relationship = Friendship.find_by(user_id: id, friend_user_id: user_id)
+    return true if relationship
+  end
 end

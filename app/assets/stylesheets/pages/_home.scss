@@ -7,13 +7,16 @@
   h1 {
     color: $pink;
     padding-top: 150px;
-    padding-left: auto;
+    margin-left: auto;
     padding-bottom:100px;
-    padding-right: auto;
+    margin-right: auto;
     line-height: 5rem;
   }
 }
 
+.game-container {
+  margin: 50px;
+}
 .games-set {
   h2 {
     color :$light-blue;

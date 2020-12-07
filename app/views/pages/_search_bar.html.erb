@@ -1,29 +1,33 @@
 
   <!-- this is the form to send params to the back to launch the search in RAWG Api -->
-  <%= form_tag "/",
-    class: "d-flex justify-content-around mt-4 mx-3",
-    data: {action: "submit->search#showCards"},
-    remote: true,
-    method: "get" do
-  %>
-    <%= text_field_tag :game,
-      params[:game],
-      class: "form-control ml-auto mr-2",
-      data: {target: "search.game"},
-      placeholder: "Game name to search!"
+  <div class="search-wrap">
+    <%= form_tag "",
+      class: "d-flex justify-content-around mx-1",
+      data: {action: "submit->search#showCards"},
+      remote: true,
+      method: "get" do
     %>
-    <%= select_tag :platform,
-      options_for_select(platforms),
-      data: {target: "search.platform"},
-      class: "form-control ml-auto mr-2"
-    %>
+      <%= text_field_tag :game,
+        params[:game],
+        class: "form-control ml-auto mr-2",
+        data: {target: "search.game"},
+        placeholder: "#{games_count} games to search!"
+      %>
+      <%= select_tag :platform,
+        options_for_select(platforms),
+        data: {target: "search.platform"},
+        class: "form-control ml-auto mr-2"
+      %>
 
-    <%= select_tag :genre,
-      options_for_select(genres),
-      data: {target: "search.genre"},
-      class: "form-control ml-auto mr-2"
-    %>
+      <%= select_tag :genre,
+        options_for_select(genres),
+        data: {target: "search.genre"},
+        class: "form-control ml-auto mr-2"
+      %>
 
-    <%= submit_tag "Search", class: "btn btn-primary mr-auto"%>
-  <% end %>
+      <button type="submit" class="btn btn-primary btn-search">
+        <i class="fas fa-search"></i>
+      </button>
+    <% end %>
+  </div>
   <!-- end of the search action, then to render the result in the following game cards section -->

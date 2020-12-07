@@ -1,0 +1,20 @@
+.user-action {
+  background-color:$light-gray;
+  height: 600px;
+  border-radius: 20px;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 63px;
+  .search-user {
+    margin: 20px 10px;
+  }
+  ul {
+    padding-left: 0px !important;
+  }
+  #user-list {
+    overflow-y: scroll;
+    height: 200px;
+  }
+}
+
+

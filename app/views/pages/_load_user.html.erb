@@ -1,7 +1,13 @@
 <div class="container-user">
   <%= cl_image_tag user.photo.key, alt: "#{user.user_name}", class: "avatar-large"%>
   <h6 class=user_name><%= user.user_name %></h6>
-  <h6><i class="fas fa-ghost"> </i>Owned Games: <%= user_games.count %></h6>
+  <hr>
+  <ul>
+    <li class="d-flex justify-content-between">
+      <a class="btn btn-square" href="#">G</a>
+      <span><h6><%= user_games.count %></h6></span>
+    </li>
+  </ul>
   <span><i class="fas fa-gamepad"></i> <%= platforms.count %> platforms</span>
     <% platforms.each do |platform| %>
       <input type="checkbox" class="checkbox-platform" id=<%= platform.id %>>
