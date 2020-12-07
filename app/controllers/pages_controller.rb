@@ -9,45 +9,110 @@ class PagesController < ApplicationController
 
   def home
     @responses = HTTParty.get(URL)["results"][0..11]
+    get_games_count
+    load_platforms
+    load_game_genres
   end
 
   def dashboard
+    get_games_count
+    load_platforms
+    load_game_genres
+    load_user_platforms
+    load_user_games
+    load_user_friends
+
+    # condition to trigger search of users
+    if params[:query].present?
+      load_users(params)
+      @searched_users
+      respond_to do |format|
+        format.html { render }
+        format.json {
+          render json: {
+            users_html: render_html_content(partial: "user", layout: false, locals: { users: @searched_users })
+          }
+        }
+      end
+    # condition to trigger search of games
+    elsif params[:query] == ""
+      @searched_users = User.where.not(id: current_user.id)
+      respond_to do |format|
+        format.html { render }
+        format.json {
+          render json: {
+            users_html: render_html_content(partial: "user", layout: false, locals: { users: @searched_users })
+          }
+        }
+      end
+    else
+      # this is the API to answer the fetch from the stimulus #search controller and send back the result
+      base_url = "https://api.rawg.io/api/games?search="
+
+      search_array = []
+      if params[:game].present?
+        search_array << "#{params[:game]}"
+      end
+      if params[:platform].present?
+        search_array << "&platforms=#{params['platform'].to_i}"
+      end
+      if params[:genre].present?
+        search_array << "&genres=#{params['genre'].to_i}"
+      end
+      # search_array << "&ordering=-rating"
+
+      final_url = base_url + search_array.join('')
+
+      @search_results = HTTParty.get(final_url)["results"]
+
+      respond_to do |format|
+        format.html { render }
+        format.json {
+          render json: {
+            card_html: render_html_content(partial: "game_card", layout: false, locals: { responses: @search_results })
+          }
+        }
+      end
+
+    end
+
+
+  end
+
+  private
+
+  def load_platforms
     platforms1 = HTTParty.get("https://api.rawg.io/api/platforms?ordering=name")["results"]
     platforms2 = HTTParty.get("https://api.rawg.io/api/platforms?ordering=name&page=2")["results"]
     @platforms = [["Choose a platform", ""]] + (platforms1 + platforms2).map{ |platform| [platform["name"], platform["id"]] }
-    @user = current_user
+  end
+
+  def load_user_platforms
     @user_platforms = UserPlatform.all
-    @user_games = UserGame.all
+  end
 
+  def get_games_count
+    @games_count = HTTParty.get("https://api.rawg.io/api/games")["count"]
+  end
+
+  def load_game_genres
     @genres = [["Game Type", ""]]+ HTTParty.get("https://api.rawg.io/api/genres")["results"].map{ |genre| [genre["name"], genre["id"]] }
+  end
 
-    # this is the API to answer the fetch from the stimulus #search controller and send back the result
-    base_url = "https://api.rawg.io/api/games?search="
+  def load_users(params)
+    @searched_users = User.where("user_name ILIKE ? AND id != ?", "%#{params[:query]}%", "#{current_user.id}")
+  end
 
-    search_array = []
-    if params[:game].present?
-      search_array << "#{params[:game]}"
+  def load_user_games
+    user_games = UserGame.all
+    @user_games = user_games.map do |game|
+      HTTParty.get("https://api.rawg.io/api/games/#{game.rawg_game_id}")
     end
-    if params[:platform].present?
-      search_array << "&platforms=#{params['platform'].to_i}"
-    end
-    if params[:genre].present?
-      search_array << "&genres=#{params['genre'].to_i}"
-    end
-    # search_array << "&ordering=-rating"
+    @user_games
+  end
 
-    final_url = base_url + search_array.join('')
-
-    @search_results = HTTParty.get(final_url)["results"]
-
-    respond_to do |format|
-      format.html { render }
-      format.json {
-        render json: {
-          card_html: render_html_content(partial: "game_card", layout: false, locals: { responses: @search_results })
-        }
-      }
-    end
+  def load_user_friends
+    @friends = current_user.friend_users
   end
 
 end
