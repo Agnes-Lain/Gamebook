@@ -11,7 +11,7 @@ export default class extends Controller {
 
 
     async function loadCard(game, platformId, genreId) {
-        const result = await fetch(`/user?game=${game}&platform=${platformId}&genre=${genreId}`, { headers: { accept: "application/json"} })
+        const result = await fetch(`/?game=${game}&platform=${platformId}&genre=${genreId}`, { headers: { accept: "application/json"} })
         return result.json()
     }
 

@@ -1,0 +1,42 @@
+<% responses.each do |response|  %>
+  <div class="card game-card" data-game-id=<%= response["id"]  %> >
+      <%= image_tag response["background_image"] == nil ? "https://media.istockphoto.com/vectors/coming-soon-neon-banner-vector-template-glowing-night-bright-sign-vector-id1144514162?k=6&m=1144514162&s=612x612&w=0&h=np7sPl0hycuFTiDgfKCZFy3SF7XCjbRTcyF-sSKfMO8=" : response["background_image"],class:"card-img-top", width:320, height: 200, alt: response['name'] %>
+    <div class="card-body">
+      <h4 class="card-title"><%= response['name'] %></h4>
+      <div class="game-rate d-flex justify-content-between">
+        <span class="card-text"><small><i class="fas fa-star"></i>&nbsp&nbsp<%= response['rating']%></small></span>
+        <span class="game-release"><small><i class="far fa-calendar-alt"></i>&nbsp&nbsp<%= response["released"] %></small></span>
+      </div>
+      <p class="game-genres"><small>
+        <%= response['genres'].map { |genre| genre['name'] }.join(" | ") %>
+      </small></p>
+      <hr>
+        <!-- checkboxes of platform so user can click to choose the platform of their blongs game -->
+        <div class="game-platforms">
+          <% response['platforms'].each do |platform| %>
+            <% if current_user %>
+              <input type="checkbox" class="checkbox-platform" data-target="addgame.platform" data-platform="<%= platform['platform']["name"] %>" data-game="<%= response['name'] %>" data-user=<%= current_user.id %> id=<%= "#{response['id']}-#{platform["platform"]["id"]}" %>>
+              <label for=<%= "#{response['id']}-#{platform["platform"]["id"]}" %>><%=platform['platform']["name"]%></label>
+            <% else %>
+              <input type="checkbox" class="checkbox-platform" data-target="addgame.platform" id=<%= "#{response['id']}-#{platform["platform"]["id"]}" %>>
+              <label for=<%= "#{response['id']}-#{platform["platform"]["id"]}" %>><%=platform['platform']["name"]%></label>
+            <% end %>
+          <% end %>
+        </div>
+        <!-- end of checkbox div -->
+        <div class="act-wrapper d-flex">
+          <!-- delete-button -->
+          <div class="delete-game mx-3">
+            <%= link_to "#", class: "delete-btn" do %>
+              <i class="fas fa-trash"></i>
+            <% end %>
+          </div>
+          <!-- end of delete-button -->
+          <!-- status drop-down-->
+            <i class="fas fa-battery-half"></i>
+          <%#= link_to "Add to my collection", user_user_consoles_path(current_user), method: :post, class: "btn btn-primary add-game", data: {action: "click->addgame#saveGame"} %>
+          <!-- end of the status -->
+        </div>
+    </div>
+  </div>
+<% end %>

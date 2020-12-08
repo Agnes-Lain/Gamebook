@@ -15,33 +15,33 @@
 puts '>>Loading...🚃'
 
 puts "create users..."
-# user1 = User.create(
-#   email:"test_user1@test.com",
-#   password: "test_user1@test.com",
-#   user_name: "user1"
-# )
+user1 = User.create(
+  email:"test_user1@test.com",
+  password: "test_user1@test.com",
+  user_name: "user1"
+)
 
-# image1 = URI.open("https://avatars1.githubusercontent.com/u/60975663?s=460&u=0fa7727e6fb40e7f9567fadcb43f2b7452d87c91&v=4")
-# user1.photo.attach(io: image1, filename: "user#{user1.id}.jpg", content_type: "image/png")
+image1 = URI.open("https://avatars1.githubusercontent.com/u/60975663?s=460&u=0fa7727e6fb40e7f9567fadcb43f2b7452d87c91&v=4")
+user1.photo.attach(io: image1, filename: "user#{user1.id}.jpg", content_type: "image/png")
 
-# puts "user1 created"
+puts "user1 created"
 
-# user2 = User.create(
-#   email:"test_user2@test.com",
-#   password: "test_user2@test.com",
-#   user_name: "user2"
-# )
+user2 = User.create(
+  email:"test_user2@test.com",
+  password: "test_user2@test.com",
+  user_name: "alibaba"
+)
 
-# image2 = URI.open("https://avatars3.githubusercontent.com/u/64773479?v=4")
-# user2.photo.attach(io: image2, filename: "user#{user2.id}.png", content_type: "image/png")
+image2 = URI.open("https://avatars3.githubusercontent.com/u/64773479?v=4")
+user2.photo.attach(io: image2, filename: "user#{user2.id}.png", content_type: "image/png")
 
-# puts "user2 created"
+puts "user2 created"
 
 
 user3 = User.create(
   email:"test_user3@test.com",
   password: "test_user3@test.com",
-  user_name: "user3"
+  user_name: "Aladin"
 )
 
 image3 = URI.open("https://image.shutterstock.com/image-vector/gamer-mascot-geek-boy-logo-260nw-1388054954.jpg")
@@ -52,7 +52,7 @@ puts "user3 created"
 user4 = User.create(
   email:"test_user4@test.com",
   password: "test_user4@test.com",
-  user_name: "user4"
+  user_name: "Sun Wukong"
 )
 
 image4 = URI.open("https://image.freepik.com/free-vector/gamer-youtuber-gaming-avatar-with-headphones-esport-logo_8169-260.jpg")
@@ -64,7 +64,7 @@ puts "user4 created"
 user5 = User.create(
   email:"test_user5@test.com",
   password: "test_user5@test.com",
-  user_name: "user5"
+  user_name: "Zhu Wuneng"
 )
 
 image5 = URI.open("https://mir-s3-cdn-cf.behance.net/project_modules/disp/a7734729386097.55f0774c5721a.png")
@@ -75,7 +75,7 @@ puts "user5 created"
 user6 = User.create(
   email:"test_user6@test.com",
   password: "test_user6@test.com",
-  user_name: "user6"
+  user_name: "Sha Wujing"
 )
 
 image6 = URI.open("https://mir-s3-cdn-cf.behance.net/project_modules/disp/c4b10929386097.55f0774c56281.png")
@@ -86,7 +86,7 @@ puts "user6 created"
 user7 = User.create(
   email:"test_user7@test.com",
   password: "test_user7@test.com",
-  user_name: "user7"
+  user_name: "Paulo"
 )
 
 image7 = URI.open("https://mir-s3-cdn-cf.behance.net/project_modules/max_1200/ea72e145858767.584019f61847c.png")
