@@ -4,7 +4,7 @@
     <%= form_tag "",
       class: "d-flex justify-content-around mx-1",
       data: {action: "submit->search#showCards"},
-      remote: true,
+      # remote: true,
       method: "get" do
     %>
       <%= text_field_tag :game,
