@@ -10,7 +10,7 @@ class User < ApplicationRecord
   has_many :user_games, dependent: :destroy
   has_many :user_game_user_platforms, through: :user_games, dependent: :destroy
   has_many :chatroom_users, dependent: :destroy
-  has_many :chatrooms, through: :chatroom_users
+  has_many :chatrooms, through: :chatroom_users, dependent: :destroy
   has_many :messages
 
 
