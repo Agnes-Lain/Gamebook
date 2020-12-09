@@ -17,7 +17,7 @@ class ChatroomUsersController < ApplicationController
         format.html { render }
         format.json {
           render json: {
-            hatroom_html: render_html_content(partial: "../chatrooms/chatroom", layout: false, locals: { chatroom: @chatroom })
+            chatroom_html: render_html_content(partial: "chatrooms/chatroom", layout: false, locals: { chatroom: @chatroom })
           }
         }
       end

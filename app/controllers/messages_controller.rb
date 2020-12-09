@@ -7,7 +7,7 @@ class MessagesController < ApplicationController
     @message.user = current_user
     authorize @message
     if @message.save
-      redirect_to user_root_path( anchor: "message-#{@message.id}")
+      redirect_to user_root_path(anchor: "message-#{@message.id}")
     else
       render "chatrooms/show"
     end

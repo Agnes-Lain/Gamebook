@@ -2,7 +2,7 @@ import { Controller } from "stimulus"
 import { fetchWithToken } from "../utils/fetch_with_token";
 
 export default class extends Controller {
-  static targets = ["chatContainer"]
+  static targets = ["chatContainer", "message"]
 
   initChatroom(e) {
     const friendUserId = e.currentTarget.dataset.friend
@@ -35,8 +35,32 @@ export default class extends Controller {
     };
 
    createChatroom(friendUserId)
-    .then(data =>{
+    .then(data => {
       this.chatContainerTarget.innerHTML = data.chatroom_html;
     });
   };
+
+  closeBox(e) {
+    this.chatContainerTarget.innerHTML = "";
+  }
+
+  // sendMessage (e) {
+  //   e.preventDefault()
+  //   const chatroomId = e.currentTarget.dataset.chatroom_id
+  //   console.log(chatroomId)
+  //   const mes = this.messageTarget.value;
+  //   fetchWithToken(`/chatrooms/${chatroomId}/messages`, {
+  //     method: "POST",
+  //     headers: {
+  //       "Accept": "application/json",
+  //       "Content-Type": "application/json"
+  //     },
+  //     body: JSON.stringify({ message: { content: mes } })
+  //   });
+  //     // .then(res => res.json())
+  //     // .then(data => {
+  //     //   console.log(data)
+  //     // });
+  // }
+
 }
