@@ -10,12 +10,9 @@ class User < ApplicationRecord
   has_many :user_games, dependent: :destroy
   has_many :user_game_user_platforms, through: :user_games, dependent: :destroy
   has_many :chatroom_users, dependent: :destroy
-  has_many :chatrooms, through: :user_chatrooms
-  # has_and_belongs_to_many :friendships,
-  #   class_name: "User",
-  #   join_table:  :friendships,
-  #   foreign_key: :user_id,
-  #   association_foreign_key: :friend_user_id
+  has_many :chatrooms, through: :chatroom_users
+  has_many :messages
+
 
   has_many :friend_user_relationships, foreign_key: :user_id, class_name: 'Friendship'
   has_many :friend_users, through: :friend_user_relationships, source: :friend_user

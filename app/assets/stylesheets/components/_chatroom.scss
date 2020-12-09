@@ -1,0 +1,26 @@
+.chat-container {
+  width: 300px;
+  height: 400px;
+  padding: 10px;
+  position:fixed;
+  right: 50px;
+  bottom: 0px;
+  visibility: visible;
+  background-color: $light-gray;
+  z-index: 99;
+  box-shadow: 0 0 2px 2px lightgrey;
+  border-radius: 20px;
+  .author {
+    font-size: 12px;
+    font-family: $body-font;
+  }
+}
+
+.chat-active {
+  visibility: visible;
+}
+
+#messages {
+  overflow-y: scroll;
+  height: 350px;
+}

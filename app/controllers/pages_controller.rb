@@ -2,6 +2,7 @@ class PagesController < ApplicationController
   include HtmlRender
   skip_before_action :authenticate_user!, only: [ :home ]
   skip_after_action :verify_authorized, only: [ :home ]
+  before_action :get_games_count, :load_platforms, :load_game_genres
 
   NOWDATE = Time.now.to_date.to_s
   LASTDATE = (NOWDATE.to_date - 183).to_s
@@ -9,16 +10,16 @@ class PagesController < ApplicationController
 
   def home
     @responses = HTTParty.get(URL)["results"][0..11]
-    get_games_count
-    load_platforms
-    load_game_genres
+    # get_games_count
+    # load_platforms
+    # load_game_genres
     game_search_results(params)
   end
 
   def dashboard
-    get_games_count
-    load_platforms
-    load_game_genres
+    # get_games_count
+    # load_platforms
+    # load_game_genres
     load_user_platforms
     load_user_games
     load_user_friends
@@ -26,7 +27,7 @@ class PagesController < ApplicationController
     # condition to trigger search of users
     if params[:query].present?
       load_users(params)
-      @searched_users
+
       respond_to do |format|
         format.html { render }
         format.json {
@@ -48,33 +49,6 @@ class PagesController < ApplicationController
       end
     else
       game_search_results(params)
-      # this is the API to answer the fetch from the stimulus #search controller and send back the result
-      # base_url = "https://api.rawg.io/api/games?search="
-
-      # search_array = []
-      # if params[:game].present?
-      #   search_array << "#{params[:game]}"
-      # end
-      # if params[:platform].present?
-      #   search_array << "&platforms=#{params['platform'].to_i}"
-      # end
-      # if params[:genre].present?
-      #   search_array << "&genres=#{params['genre'].to_i}"
-      # end
-      # # search_array << "&ordering=-rating"
-
-      # final_url = base_url + search_array.join('')
-
-      # @search_results = HTTParty.get(final_url)["results"]
-
-      # respond_to do |format|
-      #   format.html { render }
-      #   format.json {
-      #     render json: {
-      #       card_html: render_html_content(partial: "game_card", layout: false, locals: { responses: @search_results })
-      #     }
-      #   }
-      # end
 
     end
 
@@ -144,7 +118,11 @@ class PagesController < ApplicationController
         }
       }
     end
+  end
 
+  def set_chatroom(friend_user_id)
+    @chatroom = Chatroom.new
+    @chatroom.name = ""
   end
 
 end

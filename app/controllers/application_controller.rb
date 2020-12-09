@@ -15,7 +15,7 @@ class ApplicationController < ActionController::Base
   include Pundit
 
   # Pundit: white-list approach.
-  after_action :verify_authorized, except: [:home, :users], unless: :skip_pundit?
+  after_action :verify_authorized, except: [:home], unless: :skip_pundit?
   # after_action :verify_policy_scoped, only: :home, unless: :skip_pundit?
 
 
