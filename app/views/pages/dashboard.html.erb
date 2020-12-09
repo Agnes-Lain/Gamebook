@@ -48,21 +48,21 @@
 
         <hr>
         <!-- this is the part of user's friends list -->
-        <div class="friends">
+        <div class="friends" data-controller="chatroom">
           <h6>My Friends</h6>
-          <ul data-controller="chatroom">
+          <ul>
             <% @friends.each do |friend| %>
               <li class="d-flex justify-content-between mt-2" data-friend=<%= friend.id %>  data-target="chatroom.friend">
                 <span><%= cl_image_tag friend.photo.key, alt: "#{friend.user_name}", class: "avatar"%> <%= friend.user_name %></span>
                 <span><i class="fas fa-comments chat-btn" data-action="click->chatroom#initChatroom" data-friend=<%= friend.id %>></i></span>
               </li>
             <% end %>
-            <!-- render the chatroom partial -->
-            <div class="chatbox" data-target="chatroom.chatContainer">
-              <%#= render "./chatrooms/chatroom", chatroom: @chatroom, message:@message%>
-            </div>
-            <!-- end of chatroom partial -->
           </ul>
+          <!-- render the chatroom partial -->
+          <div class="chatbox" data-target="chatroom.chatContainer">
+
+          </div>
+          <!-- end of chatroom partial -->
         </div>
         <!-- end of friends list -->
       </div>

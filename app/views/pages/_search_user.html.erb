@@ -4,7 +4,7 @@
 
     <%= form_tag "",
       class: "d-flex justify-content-around  mx-1",
-      data: {action: "submit->users#searchUser"},
+      data: { action: "submit->users#searchUser" },
       # remote: true,
       method: "get" do
     %>
@@ -12,7 +12,7 @@
         params[:query],
         class: "form-control ml-auto mr-2 user-form",
         data: {target: "users.name"},
-        placeholder: "Search for user"
+        placeholder: "Find user"
       %>
 
       <button type="submit" class="btn btn-primary btn-search">
