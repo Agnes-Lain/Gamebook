@@ -6,17 +6,23 @@ class MessagesController < ApplicationController
     @message.chatroom = @chatroom
     @message.user = current_user
     authorize @message
-    @message.save
-    # if @message.save
-    #   redirect_to user_root_path(anchor: "message-#{@message.id}")
-    # else
-    #   render "chatrooms/show"
-    # end
+    # @message.save
+    if @message.save
+      ChatroomChannel.broadcast_to(
+        @chatroom,
+        render_to_string(partial: "message", locals: { message: @message })
+      )
+      # render partial: "message", locals: {message: @message }
+    else
+      # render partical: 'error', comment: @comment, status: :bad_request
+      respond_to do |format|
+        # format.html { render }
+        format.json {
+          render json: { success: false, status: :bad_request }
+        }
+      end
+    end
 
-    ChatroomChannel.broadcast_to(
-      @chatroom,
-      render_to_string(partial: "message", locals: { message: @message })
-    )
   end
 
   private
