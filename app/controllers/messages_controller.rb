@@ -12,7 +12,6 @@ class MessagesController < ApplicationController
         @chatroom,
         render_to_string(partial: "message", locals: { message: @message })
       )
-      # render partial: "message", locals: {message: @message }
     else
       # render partical: 'error', comment: @comment, status: :bad_request
       respond_to do |format|
