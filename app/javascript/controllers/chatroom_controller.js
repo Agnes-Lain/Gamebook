@@ -38,10 +38,16 @@ export default class extends Controller {
     .then(data => {
       this.chatContainerTarget.innerHTML = data.chatroom_html;
     });
+
+    // const messages = this.mesShowTarges;
+    // messages.forEach (message => {
+    //   if message
+    // })
   };
 
   closeBox() {
     this.chatContainerTarget.innerHTML = "";
   }
+
 
 }
