@@ -21,7 +21,7 @@ export default class extends Controller {
 
   _connected() {
     // Called when the subscription is ready for use on the server
-    // this.scrollToBottom()
+    this.scrollToBottom()
   }
 
   _disconnected() {
