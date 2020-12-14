@@ -25,6 +25,12 @@
   height: 320px;
   margin-bottom: 10px;
   // position: relative;
+  .text-end {
+    text-align: right;
+  }
+  .test-start {
+    text-align: left;
+  }
 }
 
 .message-box {

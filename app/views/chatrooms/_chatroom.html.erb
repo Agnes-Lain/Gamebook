@@ -1,24 +1,17 @@
-<div class="chat-container">
+<div class="chat-container" data-controller="messages" data-chatroomId="<%= chatroom.id %>">
   <div class="chat-header d-flex justify-content-between">
     <span><h6>#<%= chatroom.name %></h6></span>
     <span class="sms-btn" data-action="click->chatroom#closeBox"><i class="fas fa-times"></i></span>
   </div>
   <hr>
-  <div id="messages" data-chatroom-id="<%= @chatroom.id %>">
-    <% if chatroom.messages %>
-      <% chatroom.messages.each do |message| %>
-        <div class="message-container" id="message-<%= message.id %>">
-          <i class="author">
-            <span><%= message.user.user_name %></span>
-            <small><%= message.created_at.strftime("%a %b %e at %l:%M%p") %></small>
-          </i>
-          <p><%= message.content %></p>
-        </div>
-      <% end %>
-    <% end %>
+  <div id="messages" data-chatroomId="<%= chatroom.id %>" data-target="messages.mes">
+    <%= render chatroom.messages %>
   </div>
   <hr>
-  <%= simple_form_for [ chatroom, Message.new ], remote: true do |f| %>
-    <%= f.input :content, label: false, input_html: { class: "form-control message-box" }, placeholder: "Message ##{chatroom.name}", autofocus: true %>
-  <% end %>
+  <!-- <div class="fixed-bottom row"> -->
+    <%= simple_form_for [ chatroom, Message.new ], html: { class: "send-message", data: {action: "ajax:success->messages#clearMes" } }, remote: true do |f| %>
+      <%= f.input :content, label: false, input_html: { class: "form-control message-box", data: { target: "messages.inputMes", chatroom: chatroom.id } }, placeholder: "Message ##{chatroom.name}", autofocus: true %>
+    <% end %>
+  <!-- </div> -->
+
 </div>
