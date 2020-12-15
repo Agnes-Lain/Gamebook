@@ -3,7 +3,7 @@ const initFriendshipBtn = () => {
   if (friendshipBtns) {
     friendshipBtns.forEach(btn =>
       btn.addEventListener("click", (event)=>{
-        if (btn.classList.contains("a-user-plus")) {
+        if (btn.classList.contains("fa-user-plus")) {
           btn.classList.remove("fa-user-plus");
           btn.classList.add("fa-user-times");
         } else {

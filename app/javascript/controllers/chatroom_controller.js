@@ -37,6 +37,8 @@ export default class extends Controller {
    createChatroom(friendUserId)
     .then(data => {
       this.chatContainerTarget.innerHTML = data.chatroom_html;
+      const messageBox = document.getElementById("messages");
+      messageBox.scrollTo(0, messageBox.scrollHeight);
     });
 
     // const messages = this.mesShowTarges;
@@ -48,6 +50,5 @@ export default class extends Controller {
   closeBox() {
     this.chatContainerTarget.innerHTML = "";
   }
-
 
 }
