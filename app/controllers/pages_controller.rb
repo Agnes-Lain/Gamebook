@@ -25,7 +25,7 @@ class PagesController < ApplicationController
     load_user_friends
 
     # condition to trigger search of users
-    if params[:query].present?
+    if params[:query] == ""
       load_users(params)
 
       respond_to do |format|
@@ -37,7 +37,7 @@ class PagesController < ApplicationController
         }
       end
     # condition to trigger search of games
-    elsif params[:query] == ""
+    elsif params[:query].present?
       @searched_users = User.where.not(id: current_user.id)
       respond_to do |format|
         format.html { render }
