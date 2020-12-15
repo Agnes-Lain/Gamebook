@@ -14,6 +14,7 @@ export default class extends Controller {
       .then(response => response.json())
       .then((data) => {
         this.userListTarget.innerHTML = data.users_html;
+        this.nameTarget.value = ""
       })
 
   }

@@ -3,12 +3,12 @@
   height: 500px;
   padding: 10px;
   position: fixed;
-  right: 100px;
-  bottom: 30px;
+  right: 150px;
+  bottom: 50px;
   visibility: visible;
   background-color: $light-gray;
   z-index: 99;
-  box-shadow: 0 0 2px 2px lightgrey;
+  box-shadow: 0 0 5px lightgrey;
   border-radius: 20px;
   .author {
     font-size: 12px;
@@ -37,4 +37,5 @@
   // position:fixed;
   // bottom:10px;
   border-radius: 20px !important;
+  box-shadow: 0 0 5px lightgrey;
 }
