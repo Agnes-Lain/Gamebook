@@ -10,47 +10,15 @@ class PagesController < ApplicationController
 
   def home
     @responses = HTTParty.get(URL)["results"][0..11]
-    # get_games_count
-    # load_platforms
-    # load_game_genres
     game_search_results(params)
   end
 
   def dashboard
-    # get_games_count
-    # load_platforms
-    # load_game_genres
     load_user_platforms
     load_user_games
     load_user_friends
 
-    # condition to trigger search of users
-    # condition to trigger search of games
-    if params[:query] == ""
-      @searched_users = User.where.not(id: current_user.id)
-      respond_to do |format|
-        format.html { render }
-        format.json {
-          render json: {
-            users_html: render_html_content(partial: "user", layout: false, locals: { users: @searched_users })
-          }
-        }
-      end
-    elsif params[:query].present?
-      load_users(params)
-      respond_to do |format|
-        format.html { render }
-        format.json {
-          render json: {
-            users_html: render_html_content(partial: "user", layout: false, locals: { users: @searched_users })
-          }
-        }
-      end
-    else
-      game_search_results(params)
-
-    end
-
+    game_search_results(params)
 
   end
 
@@ -72,10 +40,6 @@ class PagesController < ApplicationController
 
   def load_game_genres
     @genres = [["Game Type", ""]]+ HTTParty.get("https://api.rawg.io/api/genres")["results"].map{ |genre| [genre["name"], genre["id"]] }
-  end
-
-  def load_users(params)
-    @searched_users = User.where("user_name ILIKE ? AND id != ?", "%#{params[:query]}%", "#{current_user.id}")
   end
 
   def load_user_games
