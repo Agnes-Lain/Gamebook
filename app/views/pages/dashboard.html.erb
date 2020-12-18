@@ -53,7 +53,11 @@
           <ul>
             <% @friends.each do |friend| %>
               <li class="d-flex justify-content-between mt-2" data-friend=<%= friend.id %>  data-target="chatroom.friend">
-                <span><%= cl_image_tag friend.photo.key, alt: "#{friend.user_name}", class: "avatar"%> <%= friend.user_name %></span>
+                <% if friend.photo.attached? %>
+                  <span><%= cl_image_tag friend.photo.key, alt: "#{friend.user_name}", class: "avatar"%> <%= friend.user_name %></span>
+                <% else %>
+                  <span><%= image_tag "avatar_pink.png", alt: "#{friend.user_name}", class: "avatar"%> <%= friend.user_name %></span>
+                <% end %>
                 <span><i class="fas fa-comments chat-btn" data-action="click->chatroom#initChatroom" data-friend=<%= friend.id %>></i></span>
               </li>
             <% end %>

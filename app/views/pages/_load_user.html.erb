@@ -1,5 +1,9 @@
 <div class="container-user">
-  <%= cl_image_tag user.photo.key, alt: "#{user.user_name}", class: "avatar-large"%>
+  <% if user.photo.attached? %>
+    <%= cl_image_tag user.photo.key, alt: "#{user.user_name}", class: "avatar-large"%>
+  <% else %>
+    <%=  image_tag "avatar_pink.png", class: "avatar-large" %>
+  <% end %>
   <h6 class=user_name><%= user.user_name %></h6>
   <hr>
   <ul>

@@ -5,7 +5,9 @@
   </div>
   <hr>
   <div id="messages" data-chatroomId="<%= chatroom.id %>" data-target="messages.mes">
-    <%= render messages %>
+    <% if messages %>
+      <%= render messages %>
+    <% end %>
   </div>
   <hr>
   <!-- <div class="fixed-bottom row"> -->

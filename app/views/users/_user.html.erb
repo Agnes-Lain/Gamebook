@@ -1,6 +1,10 @@
 <% users.each do |user| %>
   <li data-user=<%= user.id %> class="d-flex justify-content-between mt-2">
-    <span><%= cl_image_tag user.photo.key, alt: "#{user.user_name}", class: "avatar"%> <%= user.user_name %></span>
+    <% if user.photo.attached? %>
+      <span><%= cl_image_tag user.photo.key, alt: "#{user.user_name}", class: "avatar"%> <%= user.user_name %></span>
+    <% else %>
+      <span><%=  image_tag "avatar_pink.png", class: "avatar" %><%= user.user_name %></span>
+    <% end %>
     <% if current_user.is_friend?(user.id) %>
       <%= link_to un_friend_user_path(user.id), method: :post, remote: true do %>
         <i class="fas fa-user-times friendship"></i>
