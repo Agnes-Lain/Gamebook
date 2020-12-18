@@ -4,11 +4,11 @@
     <span class="sms-btn" data-action="click->chatroom#closeBox"><i class="fas fa-times"></i></span>
   </div>
   <hr>
-  <div id="messages" data-chatroomId="<%= chatroom.id %>" data-target="messages.mes">
-    <% if messages %>
-      <%= render messages %>
-    <% end %>
-  </div>
+  <% if chatroom.messages %>
+    <div id="messages" data-chatroomId="<%= chatroom.id %>" data-target="messages.mes">
+      <%= render chatroom.messages.last(20) %>
+    </div>
+  <% end %>
   <hr>
   <!-- <div class="fixed-bottom row"> -->
     <%= simple_form_for [ chatroom, Message.new ], html: { class: "send-message", data: {action: "ajax:success->messages#clearMes" } }, remote: true do |f| %>

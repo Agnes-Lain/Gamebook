@@ -9,12 +9,11 @@ class ChatroomsController < ApplicationController
     if room.length > 0
       @chatroom = Chatroom.find(room.first)
       authorize @chatroom
-      @messages = @chatroom.messages.last(20)
       respond_to do |format|
         format.html { render }
         format.json {
           render json: {
-            chatroom_html: render_html_content(partial: "chatroom", layout: false, locals: { chatroom: @chatroom, messages: @messages })
+            chatroom_html: render_html_content(partial: "chatroom", layout: false, locals: { chatroom: @chatroom})
           }
         }
       end
