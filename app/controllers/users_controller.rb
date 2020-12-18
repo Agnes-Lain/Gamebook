@@ -6,26 +6,14 @@ class UsersController < ApplicationController
   # skip_before_action :verify_authorized
 
   def index
-    if params[:query].nil?
-      @searched_users = User.where.not(id: current_user.id)
-      respond_to do |format|
-        format.html { render }
-        format.json {
-          render json: {
-            users_html: render_html_content(partial: "user", layout: false, locals: { users: @searched_users })
-          }
+    load_users
+    respond_to do |format|
+      format.html { render }
+      format.json {
+        render json: {
+          users_html: render_html_content(partial: "user", layout: false, locals: { users: @searched_users })
         }
-      end
-    else
-      load_users(params)
-      respond_to do |format|
-        format.html { render }
-        format.json {
-          render json: {
-            users_html: render_html_content(partial: "user", layout: false, locals: { users: @searched_users })
-          }
-        }
-      end
+      }
     end
   end
 
@@ -55,8 +43,13 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
   end
 
-  def load_users(params)
-    @searched_users = User.where("user_name ILIKE ? AND id != ?", "%#{params[:query]}%", "#{current_user.id}")
+  def load_users
+    @searched_users =
+    if params[:query]
+      @searched_users = User.where("user_name ILIKE ? AND id != ?", "%#{params[:query]}%", current_user.id.to_s)
+    else
+      User.where.not(id: current_user.id)
+    end
   end
 
 end
