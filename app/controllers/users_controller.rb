@@ -6,7 +6,7 @@ class UsersController < ApplicationController
   # skip_before_action :verify_authorized
 
   def index
-    if params[:query] == ""
+    if params[:query].nil?
       @searched_users = User.where.not(id: current_user.id)
       respond_to do |format|
         format.html { render }
@@ -16,7 +16,7 @@ class UsersController < ApplicationController
           }
         }
       end
-    elsif params[:query].present?
+    else
       load_users(params)
       respond_to do |format|
         format.html { render }
