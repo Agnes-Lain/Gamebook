@@ -1,0 +1,36 @@
+.game-container {
+ margin: 5vw 10vw;
+ position:relative;
+ hr {
+ border-color: $pink;
+ }
+}
+.game-banner {
+  height:60vh;
+  width: 100%;
+  background-size: cover;
+  background-position: center;
+  z-index: 1;
+}
+
+.game-show-body {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.game-show-info {
+  color: $light-blue;
+  .wish-btn {
+    font-size: 28px;
+  }
+}
+
+.game-show-title {
+  color:$light-blue;
+}
+
+.game-description{
+  text-align: justify;
+}
+
+
