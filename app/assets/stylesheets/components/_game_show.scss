@@ -1,6 +1,7 @@
 .game-container {
  margin: 5vw 10vw;
  position:relative;
+ color: $light-blue;
  hr {
  border-color: $pink;
  }
@@ -19,7 +20,6 @@
 }
 
 .game-show-info {
-  color: $light-blue;
   .wish-btn {
     font-size: 28px;
   }
