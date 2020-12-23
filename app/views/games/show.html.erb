@@ -57,7 +57,7 @@
           <h6><i class="fas fa-shopping-cart"></i> Stores:</h6>
           <div class="game-stores d-flex justify-content-around">
             <% @response["stores"].each do |store| %>
-              <%= link_to "#{store['store']['name']}", store['url'] %>
+              <%= link_to "#{store['store']['name']}", store['url'], target: "_blank" %>
             <% end %>
           </div>
           <hr>
@@ -70,11 +70,17 @@
 
       <!-- game galary with video and images -->
       <div class="game-show-galary ml-3">
-        <h5>Galary</h5>
-        <video width="480" height="300" controls>
-          <source src="<%= @response["clip"]["clip"] %>" type="video/mp4">
-        </video>
-
+        <h5 class="mb-3">Galary</h5>
+        <% if @response["clip"] %>
+          <video width="480" height="300" controls>
+            <source src="<%= @response["clip"]["clip"] %>" type="video/mp4">
+          </video>
+        <% else %>
+          <img src=" <%= @response["background_image_additional"] %> " alt=" <%= @response["name"] %>" width="480" height="300">
+        <% end %>
+        <br class="mt-3">
+        <h6>Offical Website:</h6>
+        <%= link_to "#{@response["name"]}", "#{@response["website"]}", target: "_blank" %>
       </div>
       <!-- end of game galary -->
 
