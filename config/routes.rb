@@ -22,4 +22,6 @@ Rails.application.routes.draw do
     resources :chatroom_users, only: :create
   end
 
+  get 'games/:id', to: 'games#show', as: :game
+
 end
