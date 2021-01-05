@@ -9,14 +9,8 @@
     margin: 20px 10px;
     text-align: center;
     color:$light-gray;
-
   }
 
-  i {
-    color: $red;
-    font-size: 20px !important;
-    vertical-align: middle;
-  }
   .user_name {
     margin-top: 1rem;
   }
@@ -25,10 +19,21 @@
   }
   .btn-square {
     color: $light-gray;
-    padding:10px 12px;
+    padding:6px 10px 6px 10px;
     background-color: $rose;
     font-family: $headers-font;
+  }
 
+  ul {
+    padding-left: 0px !important;
+    a, p, h6 {
+      margin-bottom: 0px !important;
+      vertical-align: middle;
+    }
+
+    p, h6 {
+      padding-top: 5px;
+    }
   }
 }
 

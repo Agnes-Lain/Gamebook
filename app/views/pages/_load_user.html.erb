@@ -8,11 +8,20 @@
   <hr>
   <ul>
     <li class="d-flex justify-content-between">
-      <a class="btn btn-square" href="">G</a>
+      <span class="d-flex justify-content-begin">
+        <a class="btn btn-square" href="">G</a>
+        <p>&nbsp my games</p>
+      </span>
       <span><h6><%= user_games.count %></h6></span>
     </li>
+    <li class="d-flex justify-content-between mt-2">
+      <span class="d-flex justify-content-begin">
+        <a class="btn btn-square" href="">P</a>
+        <p>&nbsp my platforms</p>
+      </span>
+      <span><h6> <%= platforms.count %> </h6></span>
+    </li>
   </ul>
-  <span><i class="fas fa-gamepad"></i> <%= platforms.count %> platforms</span>
     <% platforms.each do |platform| %>
       <input type="checkbox" class="checkbox-platform" id=<%= platform.id %>>
       <label for=<%= platform.id %>><%=platform.platform_name%> <%=platform.user_games.count%></label>
