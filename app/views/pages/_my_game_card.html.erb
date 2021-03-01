@@ -2,7 +2,7 @@
   <div class="card game-card" data-game-id=<%= response["id"]  %> >
       <%= image_tag response["background_image"] == nil ? "https://media.istockphoto.com/vectors/coming-soon-neon-banner-vector-template-glowing-night-bright-sign-vector-id1144514162?k=6&m=1144514162&s=612x612&w=0&h=np7sPl0hycuFTiDgfKCZFy3SF7XCjbRTcyF-sSKfMO8=" : response["background_image"],class:"card-img-top", width:320, height: 200, alt: response['name'] %>
     <div class="card-body">
-      <h4 class="card-title"><%= response['name'] %></h4>
+      <h4 class="card-title"><%= link_to response['name'], game_path(response["id"]) %> </h4>
       <div class="game-rate d-flex justify-content-between">
         <span class="card-text"><small><i class="fas fa-star"></i>&nbsp&nbsp<%= response['rating']%></small></span>
         <span class="game-release"><small><i class="far fa-calendar-alt"></i>&nbsp&nbsp<%= response["released"] %></small></span>

@@ -5,5 +5,16 @@ class GamesController < ApplicationController
   def show
     url = "https://api.rawg.io/api/games/" + params[:id]
     @response = HTTParty.get(url)
+
+    api_url = "http://localhost:8000/pred_games?game_id=#{params[:id]}"
+    reco_game_ids = HTTParty.get(api_url)['index'].values
+
+    @games = []
+
+    reco_game_ids.each do |id|
+      url_game = "https://api.rawg.io/api/games/#{id}"
+      @games.push(HTTParty.get(url_game))
+    end
   end
+
 end

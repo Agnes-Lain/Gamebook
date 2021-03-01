@@ -86,5 +86,17 @@
 
     </div>
   </div>
+
+  <hr>
+
+  <!-- call the python api to get content base recommendation games in cards. -->
+  <div class="game-reco">
+    <h2 class="my-5">Games similar to this</h2>
+    <div class="game-cards">
+      <div class="card-grid-lg" data-controller="addgame">
+        <%= render 'pages/game_card', responses: @games %>
+      </div>
+    </div>
+  </div>
 </div>
 
