@@ -6,7 +6,7 @@ class GamesController < ApplicationController
     url = "https://api.rawg.io/api/games/" + params[:id]
     @response = HTTParty.get(url)
 
-    api_url = "http://localhost:8000/pred_games?game_id=#{params[:id]}"
+    api_url = "https://game-one-project-p275zsri5a-ew.a.run.app/pred_games?game_id=#{params[:id]}"
     reco_game_ids = HTTParty.get(api_url)['index'].values
 
     @games = []
