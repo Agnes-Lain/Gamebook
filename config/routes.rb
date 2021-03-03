@@ -3,6 +3,7 @@ Rails.application.routes.draw do
 
   resources :users do
     resources :user_games, only: [:create]
+    resource :user_games
     resources :user_platforms, only: [:create]
     member do
       post :add_friend
@@ -23,5 +24,6 @@ Rails.application.routes.draw do
   end
 
   get 'games/:id', to: 'games#show', as: :game
+
 
 end
