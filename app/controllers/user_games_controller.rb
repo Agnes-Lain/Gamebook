@@ -28,30 +28,39 @@ class UserGamesController < ApplicationController
 
   end
 
-  def show
-    user_games = UserGame.all
+  def index
+    user_games = UserGame.where(user: current_user)
     authorize user_games
-    games = []
-    user_games.each {|game| games.push({game_id: game.rawg_game_id,
-                                        user_rating: 4
-                                        })}
-    params = {games: games}
-
-    api_url = "https://game-one-project-p275zsri5a-ew.a.run.app/user_pred_games"
-    reco_game_ids = HTTParty.post(
-      api_url,
-      body: params.to_json,
-      headers: { 'Content-Type' => 'application/json' }
-    )['game_id'].values
-
-
-    @games = []
-
-    reco_game_ids.each do |id|
-      url_game = "https://api.rawg.io/api/games/#{id}"
-      @games.push(HTTParty.get(url_game))
+    @my_games = user_games.map do |game|
+      HTTParty.get("https://api.rawg.io/api/games/#{game.rawg_game_id}")
     end
+    @my_games
 
+    if user_games.empty?
+      @games = HTTParty.get(ApplicationController::URL)["results"][0..11]
+    else
+      games = []
+      user_games.each {|game| games.push({game_id: game.rawg_game_id,
+                                          user_rating: 4
+                                          })}
+      params = {games: games}
+
+      api_url = "https://batch-552-game-one-p275zsri5a-ew.a.run.app/user_pred_games"
+      response = HTTParty.post(
+        api_url,
+        body: params.to_json,
+        headers: { 'Content-Type' => 'application/json' }
+      )
+
+      reco_game_ids = response['game_id'].values
+
+      @games = []
+
+      reco_game_ids.each do |id|
+        url_game = "https://api.rawg.io/api/games/#{id}"
+        @games.push(HTTParty.get(url_game))
+      end
+    end
   end
 
   private

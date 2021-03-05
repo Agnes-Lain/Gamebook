@@ -1,0 +1,24 @@
+<div class="dash-container">
+
+  <div class="game-reco">
+    <h4> My Game Collection</h4>
+    <div class="game-cards">
+      <div class="card-grid-lg" data-controller="addgame">
+        <%= render 'pages/game_card', responses: @my_games %>
+      </div>
+    </div>
+  </div>
+  <br>
+  <div class="game-reco">
+    <h4>Games Recommendation</h4>
+    <div class="game-cards">
+      <div class="card-grid-lg" data-controller="addgame">
+        <%= render 'pages/game_card', responses: @games %>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+
+

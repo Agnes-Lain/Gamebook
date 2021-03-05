@@ -4,12 +4,9 @@ class PagesController < ApplicationController
   skip_after_action :verify_authorized, only: [ :home ]
   before_action :get_games_count, :load_platforms, :load_game_genres
 
-  NOWDATE = Time.now.to_date.to_s
-  LASTDATE = (NOWDATE.to_date - 183).to_s
-  URL = "https://api.rawg.io/api/games?search=&dates=#{LASTDATE},#{NOWDATE}&ordering=-rating"
 
   def home
-    @responses = HTTParty.get(URL)["results"][0..11]
+    @responses = HTTParty.get(ApplicationController::URL)["results"][0..11]
     game_search_results(params)
   end
 
@@ -43,7 +40,7 @@ class PagesController < ApplicationController
   end
 
   def load_user_games
-    user_games = UserGame.all
+    user_games = UserGame.where(user: current_user)
     @user_games = user_games.map do |game|
       HTTParty.get("https://api.rawg.io/api/games/#{game.rawg_game_id}")
     end
