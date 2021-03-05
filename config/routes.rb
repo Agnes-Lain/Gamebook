@@ -2,8 +2,7 @@ Rails.application.routes.draw do
   devise_for :users
 
   resources :users do
-    resources :user_games, only: [:create]
-    resource :user_games
+    resources :user_games, only: [:index, :create]
     resources :user_platforms, only: [:create]
     member do
       post :add_friend

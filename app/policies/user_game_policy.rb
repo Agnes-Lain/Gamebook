@@ -5,6 +5,10 @@ class UserGamePolicy < ApplicationPolicy
     end
   end
 
+  def index?
+    true
+  end
+
   def create?
     true
   end
@@ -14,10 +18,10 @@ class UserGamePolicy < ApplicationPolicy
   end
 
   def update?
-    @record.user == @user
+    record.user == user
   end
 
   def destroy?
-    @record.user == @user
+    update?
   end
 end
