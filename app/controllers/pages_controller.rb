@@ -28,7 +28,7 @@ class PagesController < ApplicationController
   end
 
   def load_user_platforms
-    @user_platforms = UserPlatform.all
+    @user_platforms = UserPlatform.where(user: current_user)
   end
 
   def get_games_count
