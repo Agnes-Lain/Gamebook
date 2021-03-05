@@ -60,6 +60,7 @@ class UserGamesController < ApplicationController
         url_game = "https://api.rawg.io/api/games/#{id}"
         @games.push(HTTParty.get(url_game))
       end
+      @games = @games[0,9]
     end
   end
 

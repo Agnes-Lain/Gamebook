@@ -1,7 +1,8 @@
 <div class="dash-container">
 
   <div class="game-reco">
-    <h4> My Game Collection</h4>
+    <h3 style="color:#D09CBF"> My Game Collection</h3>
+    <br>
     <div class="game-cards">
       <div class="card-grid-lg" data-controller="addgame">
         <%= render 'pages/game_card', responses: @my_games %>
@@ -9,8 +10,11 @@
     </div>
   </div>
   <br>
+  <hr style="color:#D09CBF">
+  <br>
   <div class="game-reco">
-    <h4>Games Recommendation</h4>
+    <h3 style="color:#D09CBF">Games Recommendation</h3>
+    <br>
     <div class="game-cards">
       <div class="card-grid-lg" data-controller="addgame">
         <%= render 'pages/game_card', responses: @games %>
