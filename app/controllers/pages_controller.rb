@@ -22,8 +22,8 @@ class PagesController < ApplicationController
   private
 
   def load_platforms
-    platforms1 = HTTParty.get("https://api.rawg.io/api/platforms?ordering=name")["results"]
-    platforms2 = HTTParty.get("https://api.rawg.io/api/platforms?ordering=name&page=2")["results"]
+    platforms1 = HTTParty.get("https://api.rawg.io/api/platforms?ordering=name?key=#{ENV['RAWG_API_KEY']}")["results"]
+    platforms2 = HTTParty.get("https://api.rawg.io/api/platforms?ordering=name?key=#{ENV['RAWG_API_KEY']}&page=2")["results"]
     @platforms = [["Choose a platform", ""]] + (platforms1 + platforms2).map{ |platform| [platform["name"], platform["id"]] }
   end
 
@@ -52,7 +52,7 @@ class PagesController < ApplicationController
   end
 
   def game_search_results(params)
-    base_url = "https://api.rawg.io/api/games?search="
+    base_url = "https://api.rawg.io/api/games?key=#{ENV['RAWG_API_KEY']}&search="
 
     search_array = []
     if params[:game].present?

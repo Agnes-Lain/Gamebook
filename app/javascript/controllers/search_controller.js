@@ -19,9 +19,9 @@ export default class extends Controller {
       .then(data => {
         this.resultsTarget.innerHTML = data.card_html;
       });
-    this.gameTarget.value = ""
-    this.platformTarget.value = "";
-    this.genreTarget.value = "";
+    // this.gameTarget.value = ""
+    // this.platformTarget.value = "";
+    // this.genreTarget.value = "";
   };
 
 }

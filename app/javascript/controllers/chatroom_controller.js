@@ -31,15 +31,14 @@ export default class extends Controller {
       } else {
         return response
       }
-
     };
 
-   createChatroom(friendUserId)
-    .then(data => {
-      this.chatContainerTarget.innerHTML = data.chatroom_html;
-      const messageBox = document.getElementById("messages");
-      messageBox.scrollTo(0, messageBox.scrollHeight);
-    });
+    createChatroom(friendUserId)
+      .then(data => {
+        this.chatContainerTarget.innerHTML = data.chatroom_html;
+        const messageBox = document.getElementById("messages");
+        messageBox.scrollTo(0, messageBox.scrollHeight);
+      });
 
     // const messages = this.mesShowTarges;
     // messages.forEach (message => {
