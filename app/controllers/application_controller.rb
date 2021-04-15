@@ -4,7 +4,7 @@ class ApplicationController < ActionController::Base
 
   NOWDATE = Time.now.to_date.to_s
   LASTDATE = (NOWDATE.to_date - 183).to_s
-  URL = "https://api.rawg.io/api/games?search=&dates=#{LASTDATE},#{NOWDATE}&ordering=-rating"
+  URL = "https://api.rawg.io/api/games?key=#{ENV['RAWG_API_KEY']}&search=&dates=#{LASTDATE},#{NOWDATE}&ordering=-rating"
 
   def configure_permitted_parameters
     # For additional fields in app/views/devise/registrations/new.html.erb
