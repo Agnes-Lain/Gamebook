@@ -5,14 +5,16 @@
     <% else %>
       <span><%=  image_tag "avatar_pink.png", class: "avatar" %><%= user.user_name %></span>
     <% end %>
-    <% if current_user.is_friend?(user.id) %>
+    <% if current_user.is_friend?(user.id) && user.is_friend?(current_user.id) %>
       <%= link_to un_friend_user_path(user.id), method: :post, remote: true do %>
         <i class="fas fa-user-times friendship"></i>
       <% end %>
+    <% elsif current_user.is_friend?(user.id) %>
+      <i class="fas fa-question-circle"></i>
     <% else %>
-      <%= link_to add_friend_user_path(user.id), method: :post, remote: true do %>
-      <span><i class="fas fa-user-plus friendship"></i></span>
-      <% end %>
+      <div data-controller='addfriend'>
+        <span data-action='click->addfriend#friendRequest'><i class="fas fa-user-plus friendship"></i></span>
+      </div>
     <% end %>
   </li>
 <% end %>

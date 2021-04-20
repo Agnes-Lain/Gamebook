@@ -40,10 +40,10 @@ class UserGamesController < ApplicationController
       @games = HTTParty.get(ApplicationController::URL)["results"][0..11]
     else
       games = []
-      user_games.each {|game| games.push({game_id: game.rawg_game_id,
+      user_games.each { |game| games.push({game_id: game.rawg_game_id,
                                           user_rating: 4
                                           })}
-      params = {games: games}
+      params = { games: games }
 
       api_url = "https://batch-552-game-one-p275zsri5a-ew.a.run.app/user_pred_games"
       response = HTTParty.post(
@@ -60,7 +60,7 @@ class UserGamesController < ApplicationController
         url_game = "https://api.rawg.io/api/games/#{id}"
         @games.push(HTTParty.get(url_game))
       end
-      @games = @games[0,9]
+      @games = @games[0, 9]
     end
   end
 
