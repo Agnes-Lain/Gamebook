@@ -19,16 +19,18 @@ class UsersController < ApplicationController
 
   def add_friend
     if current_user.add_friend(@user.id)
-      # respond_to do |format|
-      #   format.html { redirect_to user_root_path }
-      #   format.js
-      # end
-      redirect_to user_root_path
+      respond_to do |format|
+        format.html { render }
+        format.json {
+          render json: { success: true }
+        }
+      end
+      # redirect_to user_root_path
     end
   end
 
   def un_friend
-    if current_user.un_friend(@user.id)
+    if current_user.un_friend(@user.id) && @user.un_friend(current_user.id)
       # respond_to do |format|
       #   format.html { redirect_to user_root_path }
       #   format.js

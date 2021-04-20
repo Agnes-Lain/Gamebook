@@ -24,5 +24,7 @@ Rails.application.routes.draw do
 
   get 'games/:id', to: 'games#show', as: :game
 
+  resources :notifications, only: [:create, :index]
+
 
 end

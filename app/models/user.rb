@@ -12,19 +12,18 @@ class User < ApplicationRecord
   has_many :chatroom_users, dependent: :destroy
   has_many :chatrooms, through: :chatroom_users, dependent: :destroy
   has_many :messages
-
-
   has_many :friend_user_relationships, foreign_key: :user_id, class_name: 'Friendship'
   has_many :friend_users, through: :friend_user_relationships, source: :friend_user
 
   has_many :user_relationship, foreign_key: :friend_user_id, class_name: 'Friendship'
   has_many :users, through: :user_relationships, source: :user
 
+  has_many :notifications
+
   has_one_attached :photo
 
   def add_friend(user_id)
     friend_user_relationships.create(friend_user_id: user_id)
-
   end
 
   def un_friend(user_id)

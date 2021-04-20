@@ -3,7 +3,7 @@ class GamesController < ApplicationController
   skip_after_action :verify_authorized, only: [ :show ]
 
   def show
-    url = "https://api.rawg.io/api/games/" + params[:id]
+    url = "https://api.rawg.io/api/games/#{params[:id]}?key=#{ENV['RAWG_API_KEY']}"
     @response = HTTParty.get(url)
 
     api_url = "https://batch-552-game-one-p275zsri5a-ew.a.run.app/pred_games?game_id=#{params[:id]}"
@@ -12,7 +12,7 @@ class GamesController < ApplicationController
     @games = []
 
     reco_game_ids.each do |id|
-      url_game = "https://api.rawg.io/api/games/#{id}"
+      url_game = "https://api.rawg.io/api/games/#{id}?key=#{ENV['RAWG_API_KEY']}"
       @games.push(HTTParty.get(url_game))
     end
   end

@@ -16,14 +16,13 @@ class PagesController < ApplicationController
     load_user_friends
 
     game_search_results(params)
-
   end
 
   private
 
   def load_platforms
-    platforms1 = HTTParty.get("https://api.rawg.io/api/platforms?ordering=name?key=#{ENV['RAWG_API_KEY']}")["results"]
-    platforms2 = HTTParty.get("https://api.rawg.io/api/platforms?ordering=name?key=#{ENV['RAWG_API_KEY']}&page=2")["results"]
+    platforms1 = HTTParty.get("https://api.rawg.io/api/platforms?key=#{ENV['RAWG_API_KEY']}&ordering=name")["results"]
+    platforms2 = HTTParty.get("https://api.rawg.io/api/platforms?key=#{ENV['RAWG_API_KEY']}&ordering=name&page=2")["results"]
     @platforms = [["Choose a platform", ""]] + (platforms1 + platforms2).map{ |platform| [platform["name"], platform["id"]] }
   end
 
@@ -32,23 +31,26 @@ class PagesController < ApplicationController
   end
 
   def get_games_count
-    @games_count = HTTParty.get("https://api.rawg.io/api/games")["count"]
+    @games_count = HTTParty.get("https://api.rawg.io/api/games?key=#{ENV['RAWG_API_KEY']}")["count"]
   end
 
   def load_game_genres
-    @genres = [["Game Type", ""]]+ HTTParty.get("https://api.rawg.io/api/genres")["results"].map{ |genre| [genre["name"], genre["id"]] }
+    @genres = [["Game Type", ""]]+ HTTParty.get("https://api.rawg.io/api/genres?key=#{ENV['RAWG_API_KEY']}")["results"].map{ |genre| [genre["name"], genre["id"]] }
   end
 
   def load_user_games
     user_games = UserGame.where(user: current_user)
     @user_games = user_games.map do |game|
-      HTTParty.get("https://api.rawg.io/api/games/#{game.rawg_game_id}")
+      HTTParty.get("https://api.rawg.io/api/games/#{game.rawg_game_id}?key=#{ENV['RAWG_API_KEY']}")
     end
     @user_games
   end
 
   def load_user_friends
-    @friends = current_user.friend_users
+    user_friends = current_user.friend_users
+    @friends = []
+    user_friends.each { |friend| @friends << friend if friend.is_friend?(current_user) }
+    @friends
   end
 
   def game_search_results(params)
