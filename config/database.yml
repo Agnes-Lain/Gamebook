@@ -22,8 +22,13 @@ default: &default
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
 
 development:
-  <<: *default
+  # <<: *default
+  adapter: postgresql
+  encoding: utf8
   database: Gamebook_development
+  pool: 5
+  username: yizhuzong
+  password:
 
   # The specified database role being used to connect to postgres.
   # To create additional roles in postgres see `$ createuser --help`.

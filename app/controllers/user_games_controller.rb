@@ -32,7 +32,7 @@ class UserGamesController < ApplicationController
     user_games = UserGame.where(user: current_user)
     authorize user_games
     @my_games = user_games.map do |game|
-      HTTParty.get("https://api.rawg.io/api/games/#{game.rawg_game_id}")
+      HTTParty.get("https://api.rawg.io/api/games/#{game.rawg_game_id}?key=#{ENV['RAWG_API_KEY']}")
     end
     @my_games
 
@@ -57,7 +57,7 @@ class UserGamesController < ApplicationController
       @games = []
 
       reco_game_ids.each do |id|
-        url_game = "https://api.rawg.io/api/games/#{id}"
+        url_game = "https://api.rawg.io/api/games/#{id}?key=#{ENV['RAWG_API_KEY']}"
         @games.push(HTTParty.get(url_game))
       end
       @games = @games[0, 9]
