@@ -23,7 +23,11 @@ class PagesController < ApplicationController
   def load_platforms
     platforms1 = HTTParty.get("https://api.rawg.io/api/platforms?key=#{ENV['RAWG_API_KEY']}&ordering=name")["results"]
     platforms2 = HTTParty.get("https://api.rawg.io/api/platforms?key=#{ENV['RAWG_API_KEY']}&ordering=name&page=2")["results"]
-    @platforms = [["Choose a platform", ""]] + (platforms1 + platforms2).map{ |platform| [platform["name"], platform["id"]] }
+    if platforms1 && platforms2
+      @platforms = [["Choose a platform", ""]] + (platforms1 + platforms2).map{ |platform| [platform["name"], platform["id"]] }
+    else
+      @platforms =[]
+    end
   end
 
   def load_user_platforms
@@ -35,7 +39,12 @@ class PagesController < ApplicationController
   end
 
   def load_game_genres
-    @genres = [["Game Type", ""]]+ HTTParty.get("https://api.rawg.io/api/genres?key=#{ENV['RAWG_API_KEY']}")["results"].map{ |genre| [genre["name"], genre["id"]] }
+    game_genre = HTTParty.get("https://api.rawg.io/api/genres?key=#{ENV['RAWG_API_KEY']}")["results"]
+    if !game_genre.nil?
+      @genres = [["Game Type", ""]] + game_genre.map{ |genre| [genre["name"], genre["id"]]
+    else
+      @genres = [["Game Type", ""]]
+    end
   end
 
   def load_user_games

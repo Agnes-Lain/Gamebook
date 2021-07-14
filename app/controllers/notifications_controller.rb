@@ -16,6 +16,22 @@ class NotificationsController < ApplicationController
           }
         end
       end
+
+      # if @message.save
+      #   ChatroomChannel.broadcast_to(
+      #     @chatroom,
+      #     render_to_string(partial: "message", locals: { message: @message })
+      #   )
+      # else
+      #   # render partical: 'error', comment: @comment, status: :bad_request
+      #   respond_to do |format|
+      #     # format.html { render }
+      #     format.json {
+      #       render json: { success: false, status: :bad_request }
+      #     }
+      #   end
+      # end
+
     end
   end
 
