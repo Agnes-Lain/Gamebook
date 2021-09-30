@@ -6,7 +6,12 @@ class PagesController < ApplicationController
 
 
   def home
-    @responses = HTTParty.get(ApplicationController::URL)["results"][0..11]
+    game_responses = HTTParty.get(ApplicationController::URL)
+    if game_responses.code == 200
+      @responses = game_responses["results"][0..11]
+    else
+      @responses = []
+    end
     game_search_results(params)
   end
 
