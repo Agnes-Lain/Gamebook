@@ -41,7 +41,7 @@ class PagesController < ApplicationController
   def load_game_genres
     game_genre = HTTParty.get("https://api.rawg.io/api/genres?key=#{ENV['RAWG_API_KEY']}")["results"]
     if !game_genre.nil?
-      @genres = [["Game Type", ""]] + game_genre.map{ |genre| [genre["name"], genre["id"]]
+      @genres = [["Game Type", ""]] + game_genre.map{ |genre| [genre["name"], genre["id"]] }
     else
       @genres = [["Game Type", ""]]
     end
