@@ -26,7 +26,7 @@
 
         <h3>My Games</h3>
         <div class="card-grid-sm">
-          <% if @user_games[0]['error'] != "The monthly API limit reached" %>
+          <% if !@user_games.empty? && @user_games[0]['error'] != "The monthly API limit reached" %>
             <%= render "my_game_card", responses: @user_games %>
           <% end %>
         </div>
