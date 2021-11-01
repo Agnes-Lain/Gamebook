@@ -5,7 +5,9 @@
     <br>
     <div class="game-cards">
       <div class="card-grid-lg" data-controller="addgame">
-        <%= render 'pages/game_card', responses: @my_games %>
+        <% if !@my_games.length != 0 %>
+          <%= render 'pages/game_card', responses: @my_games %>
+        <% end %>
       </div>
     </div>
   </div>
@@ -17,7 +19,9 @@
     <br>
     <div class="game-cards">
       <div class="card-grid-lg" data-controller="addgame">
+      <% if @games.length != 0 %>
         <%= render 'pages/game_card', responses: @games %>
+      <% end %>
       </div>
     </div>
   </div>

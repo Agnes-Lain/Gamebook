@@ -29,16 +29,30 @@ class UserGamesController < ApplicationController
   end
 
   def index
+    # get the user games id array according to the user_id
     user_games = UserGame.where(user: current_user)
     authorize user_games
+    # Mapping each game_id from the array and stock the json result after request the api call for game details
     @my_games = user_games.map do |game|
       HTTParty.get("https://api.rawg.io/api/games/#{game.rawg_game_id}?key=#{ENV['RAWG_API_KEY']}")
     end
-    @my_games
-
+    # check if the API call limits is reached, if so, game list return to empty, otherwise keep the filled game list
+    if @my_games[0]["error"]
+      @my_games = []
+    end
+    # initiate an empty game array
+    @games = []
+    # The following condition means to check if we should push standard game recommendation or personalised recommendation
     if user_games.empty?
+      # if no user records, we call the rawg API to get standard game suggestions from their recommendations
       @games = HTTParty.get(ApplicationController::URL)["results"][0..11]
+      # check if the API has error, if so, keep the game list empty
+      if @games[0]["error"]
+        @games = []
+      end
     else
+      # if we have the user collections, we then call our python recommendation fast_api to make collection prediction
+      # following is to transfer the user games to params in order to send to Python API
       games = []
       user_games.each { |game| games.push({game_id: game.rawg_game_id,
                                           user_rating: 4
@@ -51,16 +65,20 @@ class UserGamesController < ApplicationController
         body: params.to_json,
         headers: { 'Content-Type' => 'application/json' }
       )
-
-      reco_game_ids = response['game_id'].values
-
-      @games = []
-
-      reco_game_ids.each do |id|
-        url_game = "https://api.rawg.io/api/games/#{id}?key=#{ENV['RAWG_API_KEY']}"
-        @games.push(HTTParty.get(url_game))
+      # following is to check if the API reponse is positive or not
+      if response.code == 200
+        reco_game_ids = response['game_id'].values
+        # if the response is positive and we get the list of games recommended
+        # for each new recommendation, we can rawg API to get game json file and stock into @games
+        reco_game_ids[0, 9].each do |id|
+          url_game = "https://api.rawg.io/api/games/#{id}?key=#{ENV['RAWG_API_KEY']}"
+          @games.push(HTTParty.get(url_game))
+        end
+        # check rawg API limiation error again
+        if @games[0]["error"]
+          @games = []
+        end
       end
-      @games = @games[0, 9]
     end
   end
 
@@ -69,4 +87,5 @@ class UserGamesController < ApplicationController
   def game_params
     params.require(:game).permit(:rawg_game_id, :game_name)
   end
+
 end
