@@ -11,4 +11,12 @@ This platform is based on the [RAWG API](https://rawg.io/apidocs), all the game 
 
 challenge: different than the normal rails app, as the essential datas are from an API, the app is built mostly on ajax controllers to communicate with the back.
 
+New feature: Personally game recommedation programe coded in Python during my data science bootcamp with colleagues, which used 3 machine learning models: 
+  <li>Content base model to find games the most similar with one given game</li>
+  <li>Knn Model to find most similar user with given game collection</li>
+  <li>unsupervised learning with Collaborative Filtering Model </li>
+  <br>
+  
+Deployment on Google cloud platform.
+
 Rails app generated with [lewagon/rails-templates](https://github.com/lewagon/rails-templates), created by the [Le Wagon coding bootcamp](https://www.lewagon.com) team.
