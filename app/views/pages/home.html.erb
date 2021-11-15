@@ -24,7 +24,11 @@
     <h2 class="my-5">Games on the trend</h2>
     <div class="game-cards">
       <div class="card-grid-lg" data-controller="addgame">
+      <% if @responses.length != 0 %>
         <%= render 'game_card', responses: @responses %>
+      <% else %>
+        <h3>This website is under construction, it will come back soon...</h3>
+      <% end %>
       </div>
     </div>
   </div>
