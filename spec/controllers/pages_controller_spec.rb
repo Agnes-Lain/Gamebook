@@ -10,6 +10,7 @@ RSpec.describe PagesController, type: :controller do
         { :title => "Test title!", :description => "This is a test description", :status => "draft" }
     }
 
+
     let(:valid_session) { {} }
 
     describe "GET #home" do
