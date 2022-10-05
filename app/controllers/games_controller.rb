@@ -9,7 +9,7 @@ class GamesController < ApplicationController
       @response = []
     end
 
-    api_url = "https://batch-552-game-one-p275zsri5a-ew.a.run.app/pred_games?game_id=#{params[:id]}"
+    api_url = "https://batch-552-game-one-p275zsri5a-ew.a.run.app/pred_games?game_id=#{params[:id]}?key=AIzaSyCvJxzaze4QI8N6iaAomf0lozpGFGawQos"
     res = HTTParty.get(api_url)
     if res.code == 200
       reco_game_ids = res['index'].values
