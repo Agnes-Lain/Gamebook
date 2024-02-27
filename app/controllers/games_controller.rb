@@ -9,7 +9,7 @@ class GamesController < ApplicationController
       @response = []
     end
 
-    api_url = "https://batch-552-game-one-p275zsri5a-ew.a.run.app/pred_games?game_id=#{params[:id]}?key=AIzaSyCvJxzaze4QI8N6iaAomf0lozpGFGawQos"
+    api_url = "https://batch-552-game-one-p275zsri5a-ew.a.run.app/pred_games?game_id=#{params[:id]}?key=#{ENV['GOOGLE_KEY']}"
     res = HTTParty.get(api_url)
     if res.code == 200
       reco_game_ids = res['index'].values
@@ -20,7 +20,7 @@ class GamesController < ApplicationController
         url_game = "https://api.rawg.io/api/games/#{id}?key=#{ENV['RAWG_API_KEY']}"
         @games.push(HTTParty.get(url_game))
       end
-      if @games[0]["error"]
+      if @games.length == 0
          @games = []
       end
     end
