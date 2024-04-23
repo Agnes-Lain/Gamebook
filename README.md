@@ -1,4 +1,4 @@
-![image](https://github.com/Agnes-Lain/Gamebook/assets/60975663/b093e1b1-9072-4209-b4a6-3ac5f874c403)<h1>GameBook 🕹️ </h1>
+<h1>GameBook 🕹️ </h1>
 ----------------------------------
 
 <h2>About:</h2>
@@ -19,6 +19,9 @@ We added a "Personally game recommedation systhem" coded in Python during my dat
   <li>unsupervised learning with Collaborative Filtering Model </li>
   <br>
 
+<h2>Gallery</h2>
+![image](https://github.com/Agnes-Lain/Gamebook/assets/60975663/b093e1b1-9072-4209-b4a6-3ac5f874c403)
+![image](https://github.com/Agnes-Lain/Gamebook/assets/60975663/64d9e67c-34f7-427d-80f4-4d0b3d0311b4)
 
 Built on FastAPI, and deployment with Google cloud platform to host the API.
 
