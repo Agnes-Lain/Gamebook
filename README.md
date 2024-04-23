@@ -20,9 +20,6 @@ We added a "Personally game recommedation systhem" coded in Python during my dat
   <br>
 
 
-<h2>How it looks like?</h2>
-[image](https://github.com/Agnes-Lain/Gamebook/assets/60975663/12e7b9cf-28fa-4220-88cd-6dc2a6a1badc)
-
 Built on FastAPI, and deployment with Google cloud platform to host the API.
 
 <strong>The details of this projet is in this Repo <a href="https://github.com/Agnes-Lain/game_one">[Game one]</strong>
