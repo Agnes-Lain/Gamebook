@@ -28,7 +28,8 @@ Built on FastAPI, and deployment with Google cloud platform to host the API.
 
 ![image](https://github.com/Agnes-Lain/Gamebook/assets/60975663/b093e1b1-9072-4209-b4a6-3ac5f874c403)
 ![image](https://github.com/Agnes-Lain/Gamebook/assets/60975663/470cf499-1b52-44f2-a9ae-aff4c4647f41)
-![image](https://github.com/Agnes-Lain/Gamebook/assets/60975663/bcbac129-adc0-4b4e-b825-81eca70ecd3c)
+![image](https://github.com/Agnes-Lain/Gamebook/assets/60975663/b20e93f9-1e98-4307-aebd-9679585418b2)
+
 
 
 Rails app generated with [lewagon/rails-templates](https://github.com/lewagon/rails-templates), created by the [Le Wagon coding bootcamp](https://www.lewagon.com) team.
